@@ -26,7 +26,7 @@
 - Likes or ratings?
 - Add to favourites
 
-### User Stories
+### MVP User Stories
 
 ```
 As a user 
@@ -48,13 +48,15 @@ I would like to click on the title and see all the ingredients and how to make i
 As a user
 because I am obsessed with BBC
 I would like all these recipes to come from BBC Food
-
+```
+### Additional features User Stories
+```
 As a user
 I can listen to music
 I would like to have a link to a Spotify playlist based on the recipe I have selected
 
 As a user
 I can cook a variety of recipes
-I would like to buy the missing ingredients
+I would like to add to a shopping cart the missing ingredients
 
 ```
