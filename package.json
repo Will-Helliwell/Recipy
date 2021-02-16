@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/AJSMonty/Recipy/issues"
   },
-  "homepage": "https://github.com/AJSMonty/Recipy#readme"
+  "homepage": "https://github.com/AJSMonty/Recipy#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
