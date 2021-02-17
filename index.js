@@ -6,27 +6,27 @@ const path = require("path");
 require("dotenv").config();
 
 console.log("inside index.js script")
-console.log(process.env.RACK_ENV)
+console.log(process.env.NODE_ENV)
 
 const app = express();
 
 const port = process.env.PORT || 5000;
 
 //connect to the database
-if (process.env.RACK_ENV == "test") {
-  console.log("TEST IS WORKING", process.env.RACK_ENV);
+if (process.env.NODE_ENV == "test") {
+  console.log("TEST DB IS WORKING", process.env.NODE_ENV);
   mongoose
     .connect(process.env.TEST, { useNewUrlParser: true })
     .then(() => console.log(`Test Database connected successfully`))
     .catch((err) => console.log(err));
-} else if (process.env.RACK_ENV == "dev"){
-  console.log("DEV IS WORKING", process.env.RACK_ENV);
+} else if (process.env.NODE_ENV == "development"){
+  console.log("DEV IS WORKING", process.env.NODE_ENV);
   mongoose
     .connect(process.env.DEV, { useNewUrlParser: true })
     .then(() => console.log(`Dev Database connected successfully`))
     .catch((err) => console.log(err));
 } else {
-  console.log("PROD IS WORKING", process.env.RACK_ENV);
+  console.log("PROD IS WORKING", process.env.NODE_ENV);
   mongoose
     .connect(process.env.PROD, { useNewUrlParser: true })
     .then(() => console.log(`Prod Database connected successfully`))

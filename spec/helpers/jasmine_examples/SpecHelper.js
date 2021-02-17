@@ -1,7 +1,7 @@
 require("dotenv").config();
 
-process.env.RACK_ENV = "test";
-console.log("TEST IS WORKING", process.env.RACK_ENV);
+// process.env.NODE_ENV = "test";
+console.log("TEST IS WORKING", process.env.NODE_ENV);
 
 beforeEach(function () {
   jasmine.addMatchers({
@@ -19,6 +19,6 @@ beforeEach(function () {
   });
 });
 
-afterAll(function () {
-  process.env.RACK_ENV = "";
-});
+// afterAll(function () {
+//   process.env.NODE_ENV = "";
+// });
