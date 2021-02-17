@@ -1,10 +1,20 @@
 import React from 'react'
 import DairyTab from './Dairy'
 
-const IngredientList = () => {
+const IngredientList = (props) => {
+    
   return (
       <div>
-        <DairyTab/>
+        
+        <DairyTab {Collapse.propTypes = {
+            isOpen: PropTypes.bool
+        }}/>
+
+
+       
+
+
+        
       </div>
   )
 }
