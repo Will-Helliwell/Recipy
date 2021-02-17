@@ -5,13 +5,13 @@ const RecipeList = () => {
 
   const getRecipes = () => {
     fetch(
-      `http://localhost:3000/api/todos`,
+      `http://localhost:5000/api/todos`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      } 
     )
       .then((response) =>  response.json()
       )
@@ -28,23 +28,20 @@ const RecipeList = () => {
   return (
     <>
       <>
-        {recipes.length &&
+        {
           recipes.map((recipe) => {
             return (
               <>
-                <p>{recipe.title}</p>
+              <h2>NAME</h2>
+               <p> {recipe.name}</p>
+               <h2>INGREDIENTS</h2>
+                <p>{recipe.ingredients}</p>
+               <h2>INSTRUCTIONS</h2>
+                <p>{recipe.instructions}</p>
+                <h2>SERVING</h2>
+                <p>{recipe.serving}</p>
                 <>
-                  {recipe.usedIngredients.length &&
-                    recipe.usedIngredients.map((used) => {
-                      return (
-                        <>
-                          <p>{used.amount}</p>
-                          <p>{used.unit}</p>
-                          <p>{used.unitLong}</p>
-                          <p>{used.unitShort}</p>
-                        </>
-                      );
-                    })}
+      
                 </>
               </>
             );
