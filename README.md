@@ -59,4 +59,7 @@ As a user
 I can cook a variety of recipes
 I would like to add to a shopping cart the missing ingredients
 
+As a user
+So i could choose what to cook from what ingredients i have
+I would like to filter recipes
 ```
