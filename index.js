@@ -5,6 +5,9 @@ const routes = require("./routes/api");
 const path = require("path");
 require("dotenv").config();
 
+console.log("inside index.js script")
+console.log(process.env.RACK_ENV)
+
 const app = express();
 
 const port = process.env.PORT || 5000;
@@ -16,11 +19,17 @@ if (process.env.RACK_ENV == "test") {
     .connect(process.env.TEST, { useNewUrlParser: true })
     .then(() => console.log(`Test Database connected successfully`))
     .catch((err) => console.log(err));
+} else if (process.env.RACK_ENV == "dev"){
+  console.log("DEV IS WORKING", process.env.RACK_ENV);
+  mongoose
+    .connect(process.env.DEV, { useNewUrlParser: true })
+    .then(() => console.log(`Dev Database connected successfully`))
+    .catch((err) => console.log(err));
 } else {
-  console.log("Prod IS WORKING", process.env.RACK_ENV);
+  console.log("PROD IS WORKING", process.env.RACK_ENV);
   mongoose
     .connect(process.env.PROD, { useNewUrlParser: true })
-    .then(() => console.log(`Dev Database connected successfully`))
+    .then(() => console.log(`Prod Database connected successfully`))
     .catch((err) => console.log(err));
 }
 //since mongoose promise is depreciated, we overide it with node's promise

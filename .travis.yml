@@ -9,6 +9,9 @@ script:
 
 deploy:
   provider: heroku
-  app: recipy-app
+  app:
+    master: recipy-app
   api_key:
     secure: 7f16dc80-e8c4-4298-877b-b1d120a1f480
+  true:
+    repo: AJSMonty/Recipy
