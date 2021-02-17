@@ -17,9 +17,9 @@ if (process.env.RACK_ENV == "test") {
     .then(() => console.log(`Test Database connected successfully`))
     .catch((err) => console.log(err));
 } else {
-  console.log("DEV IS WORKING", process.env.RACK_ENV);
+  console.log("Prod IS WORKING", process.env.RACK_ENV);
   mongoose
-    .connect(process.env.DEV, { useNewUrlParser: true })
+    .connect(process.env.PROD, { useNewUrlParser: true })
     .then(() => console.log(`Dev Database connected successfully`))
     .catch((err) => console.log(err));
 }
