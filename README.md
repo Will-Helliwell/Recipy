@@ -61,5 +61,9 @@ I would like to add to a shopping cart the missing ingredients
 
 As a user
 So i could choose what to cook from what ingredients i have
-I would like to filter recipes
+I would like to filter recipes that have the ingredients i want to use
+
+As a user
+So i dont have to go buy more ingredients
+I would like a list of recipes for the ingredients that i have in my house
 ```
