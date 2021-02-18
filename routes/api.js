@@ -5,9 +5,9 @@ const Todo = require('../models/recipy');
 router.get('/todos', (req, res, next) => {
 
   //this will return all the data, exposing only the id and action field to the client
-  Todo.find({}, 'action')
-    .then(data => res.json(data))
-    .catch(next)
+  Todo.find({})
+  .then((data) => res.json(data))
+  .catch(next);
 });
 
 router.post('/todos', (req, res, next) => {

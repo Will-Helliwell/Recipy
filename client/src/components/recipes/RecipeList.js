@@ -32,6 +32,8 @@ const RecipeList = () => {
           recipes.map((recipe) => {
             return (
               <>
+              
+            <img src={recipe.image}></img>
               <h2>NAME</h2>
                <p> {recipe.name}</p>
                <h2>INGREDIENTS</h2>
@@ -41,7 +43,6 @@ const RecipeList = () => {
                 <h2>SERVING</h2>
                 <p>{recipe.serving}</p>
                 <>
-      
                 </>
               </>
             );
