@@ -1,7 +1,8 @@
 import React from "react";
+import hardcodedOptions from "./hardCodedOptions";
 
-const Fish = ({ type, ingredients, setIngredients }) => {
-  const options = ["Milk", "Cream", "Cheese"];
+const Categories = ({ type, ingredients, setIngredients }) => {
+  const options = hardcodedOptions;
 
   // const hardcodedOptions = {
   //   Dairy: ['Milk', 'Cream', 'Cheese']
@@ -10,10 +11,11 @@ const Fish = ({ type, ingredients, setIngredients }) => {
   return (
     <div>
       <h1>{type}</h1>
-      {options.map((ing) => {
+      {options[type].map((ing) => {
         console.log("ingredients", ing);
         return (
           <>
+            <p>{ing}</p>
             <input
               type="checkbox"
               value={ing}
@@ -24,7 +26,6 @@ const Fish = ({ type, ingredients, setIngredients }) => {
                 });
               }}
             />
-            <p>{ing}</p>
           </>
         );
       })}
@@ -32,4 +33,4 @@ const Fish = ({ type, ingredients, setIngredients }) => {
   );
 };
 
-export default Fish;
+export default Categories;
