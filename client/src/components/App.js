@@ -6,14 +6,32 @@ import IngredientList from "./ingredients/IngredientList";
 
 function App() {
   const [ingredients, setIngredients] = useState({});
-  console.log("ingredients", ingredients);
+  const selectedIngredients = Object.values(ingredients).reduce(
+    (selectedIngredients, next) => {
+      // Loop through selected ingredients object to get all keys that have a truthy value
+      const ingredientsSelected = Object.entries(next).reduce(
+        (all, [key, value]) => {
+          if (!value) return all;
+          return [...all, key];
+        },
+        []
+      );
+      // Return all selected ingredient keys to use for filtering recipes
+      return [...selectedIngredients, ...ingredientsSelected];
+    },
+    []
+  );
+  // Object.values ['value' 'value]
+  // Object.keys ['key', 'key', 'key']
+  // Object.entries [['key', 'value'], ['key', 'value]]
+  console.log("selectedIngredients", selectedIngredients);
   return (
     <div className="App">
       <IngredientList
         ingredients={ingredients}
         setIngredients={setIngredients}
       />
-      <RecipeList />
+      <RecipeList selectedIngredients={selectedIngredients} />
     </div>
   );
 }

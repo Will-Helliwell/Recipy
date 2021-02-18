@@ -12,7 +12,6 @@ const Categories = ({ type, ingredients, setIngredients }) => {
     <div>
       <h1>{type}</h1>
       {options[type].map((ing) => {
-        console.log("ingredients", ing);
         return (
           <>
             <p>{ing}</p>
