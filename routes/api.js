@@ -6,8 +6,8 @@ router.get('/todos', (req, res, next) => {
 
   //this will return all the data, exposing only the id and action field to the client
   Todo.find({})
-    .then(data => res.json(data))
-    .catch(next)
+  .then((data) => res.json(data))
+  .catch(next);
 });
 
 router.post('/todos', (req, res, next) => {
