@@ -4,9 +4,9 @@
   "description": "## Spec",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine",
+    "test": "export NODE_ENV=test && jasmine",
     "start": "node index.js",
-    "dev-start": "set RACK_ENV=dev && node index.js",
+    "dev-start": "export NODE_ENV=development && node index.js",
     "start-watch": "nodemon index.js",
     "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\""
   },
@@ -22,11 +22,11 @@
   },
   "homepage": "https://github.com/AJSMonty/Recipy#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.11.15",
-    "body-parser": "^1.18.3"
+    "mongoose": "^5.11.15"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",

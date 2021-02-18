@@ -1,7 +1,7 @@
 require('../../index')
 
 console.log("inside playerSpec")
-console.log(process.env.RACK_ENV)
+console.log(process.env.NODE_ENV)
 
 
 describe("Player", function() {
