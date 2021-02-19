@@ -13,13 +13,19 @@ Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
         .catch(next);
     });
 
-
 router.post('/todos', (req, res, next) => {
   if(req.body.action){
     Todo.create(req.body)
       .then(data => res.json(data))
       .catch(next)
-  }else {
+  } else if (req.body.page) {
+      pageNumber ++ 
+        // .then(data => res.json(data))
+        // .catch(next)
+        console.log("pageNumber ")
+        console.log(pageNumber)
+
+  } else {
     res.json({
       error: "The input field is empty"
     })
