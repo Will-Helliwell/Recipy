@@ -53,7 +53,10 @@ const RecipeList = ({ selectedIngredients }) => {
           return (
             <div className='recipe-card'>
               <img className="recipe-image" src={recipe.image}></img>
-              <p className="name"> {recipe.name}</p>
+              <p className="recipe-name"> {recipe.name}</p>
+              <p className="recipe-summary"> {recipe.summary}</p>
+              <p className="time-text">Cook: {recipe.time.cook} Prep: {recipe.time.prep}</p>
+
               {/* <h2>INGREDIENTS</h2>
               {recipe.ingredients.map((ing) => {
                 return (
