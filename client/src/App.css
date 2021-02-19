@@ -83,8 +83,9 @@
 .popup-container {
   height: 80%;
   width: 50%;
-  background-color: rgb(3, 189, 74);
+  background-color: rgb(255, 255, 255);
   position: center;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.411);
 }
 
 .popup.recipe-image {
