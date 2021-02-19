@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "../App.css";
 import RecipeList from "./recipes/RecipeList";
 import IngredientList from "./ingredients/IngredientList";
+import NextPage from "./nextPage";
 
 function App() {
   const [ingredients, setIngredients] = useState({});
@@ -32,6 +33,7 @@ function App() {
         setIngredients={setIngredients}
       />
       <RecipeList selectedIngredients={selectedIngredients} />
+      <NextPage />
     </div>
   );
 }
