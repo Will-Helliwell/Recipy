@@ -24,11 +24,9 @@ const NextPage = ({ currentPage, setCurrentPage }) => {
         console.log(currentPage)
         fetch('http://localhost:5000/api/todos', {
             method: "POST",
+            body: JSON.stringify({page: currentPage}),
             headers: {
               "Content-Type": "application/json",
-              body: JSON.stringify({
-                page: currentPage
-              })
             },
           })
             .then((response) => response.json())
