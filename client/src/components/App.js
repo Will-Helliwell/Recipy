@@ -26,7 +26,7 @@ function App() {
   // Object.values ['value' 'value]
   // Object.keys ['key', 'key', 'key']
   // Object.entries [['key', 'value'], ['key', 'value]]
-  console.log("selectedIngredients", selectedIngredients);
+  // console.log("selectedIngredients", selectedIngredients);
   return (
     <div className="App">
       <IngredientList
