@@ -58,7 +58,7 @@ const RecipeList = ({ selectedIngredients }) => {
               <p className="recipe-summary"> {recipe.summary}</p>
               <p className="time-text">Cook: {recipe.time.cook} Prep: {recipe.time.prep}</p>
 
-              <Popup trigger={<button> Recipe Info</button>} position="right center">
+              <Popup trigger={<button> Recipe Info</button>} position="top center">
                 <div className="popup">Content here</div>
               </Popup>
 
