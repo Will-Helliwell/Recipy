@@ -1,9 +1,9 @@
 import React from 'react'
 
-const NextPage = () => {
+const NextPage = ({ currentPage, setCurrentPage }) => {
   return (
-      <div>
-      </div>
+    <div>
+    </div>
   )
 }
 

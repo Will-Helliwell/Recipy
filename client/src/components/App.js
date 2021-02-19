@@ -6,6 +6,7 @@ import IngredientList from "./ingredients/IngredientList";
 import NextPage from "./nextPage";
 
 function App() {
+  const [currentPage, setCurrentPage] = useState(1);
   const [ingredients, setIngredients] = useState({});
   const selectedIngredients = Object.values(ingredients).reduce(
     (selectedIngredients, next) => {
@@ -33,7 +34,10 @@ function App() {
         setIngredients={setIngredients}
       />
       <RecipeList selectedIngredients={selectedIngredients} />
-      <NextPage />
+      <NextPage
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }
