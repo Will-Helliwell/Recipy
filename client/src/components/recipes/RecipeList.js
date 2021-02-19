@@ -12,9 +12,9 @@ const RecipeList = ({ selectedIngredients }) => {
     })
       .then((response) => response.json())
       .then((result) => {
-        let shortList = [];
-        shortList.push(recipe[0, 4])
-        setRecipes(shortList);
+        let recipe = result.filter(entry => entry.author == "Esther Clark") // Created after X
+                   .slice(0, 10);
+        setRecipes(recipe);
         console.log("Success:", result);
       });
   };
@@ -47,15 +47,14 @@ const RecipeList = ({ selectedIngredients }) => {
   }, [selectedIngredients, recipes]);
 
   return (
-    <>
+    <div className="all-recipes">
       <>
         {filteredRecipes.map((recipe) => {
           return (
             <div className='recipe-card'>
-              <img src={recipe.image}></img>
-              <h2>NAME</h2>
-              <p> {recipe.name}</p>
-              <h2>INGREDIENTS</h2>
+              <img className="recipe-image" src={recipe.image}></img>
+              <p className="name"> {recipe.name}</p>
+              {/* <h2>INGREDIENTS</h2>
               {recipe.ingredients.map((ing) => {
                 return (
                   <>
@@ -73,12 +72,12 @@ const RecipeList = ({ selectedIngredients }) => {
               })}
               <h2>Time</h2>
               <p>Cook: {recipe.time.cook}</p>
-              <p>Prep: {recipe.time.prep}</p>
+              <p>Prep: {recipe.time.prep}</p> */}
             </div>
           );
         })}
       </>
-    </>
+    </div>
   );
 };
 
