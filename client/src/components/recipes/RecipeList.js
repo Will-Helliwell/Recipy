@@ -12,7 +12,9 @@ const RecipeList = ({ selectedIngredients }) => {
     })
       .then((response) => response.json())
       .then((result) => {
-        setRecipes(result);
+        let shortList = [];
+        shortList.push(recipe[0, 4])
+        setRecipes(shortList);
         console.log("Success:", result);
       });
   };
@@ -49,7 +51,7 @@ const RecipeList = ({ selectedIngredients }) => {
       <>
         {filteredRecipes.map((recipe) => {
           return (
-            <>
+            <div className='recipe-card'>
               <img src={recipe.image}></img>
               <h2>NAME</h2>
               <p> {recipe.name}</p>
@@ -72,7 +74,7 @@ const RecipeList = ({ selectedIngredients }) => {
               <h2>Time</h2>
               <p>Cook: {recipe.time.cook}</p>
               <p>Prep: {recipe.time.prep}</p>
-            </>
+            </div>
           );
         })}
       </>
