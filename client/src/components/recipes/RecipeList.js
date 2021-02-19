@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, cloneElement } from "react";
+import Popup from "reactjs-popup";
 
 const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
@@ -56,6 +57,10 @@ const RecipeList = ({ selectedIngredients }) => {
               <p className="recipe-name"> {recipe.name}</p>
               <p className="recipe-summary"> {recipe.summary}</p>
               <p className="time-text">Cook: {recipe.time.cook} Prep: {recipe.time.prep}</p>
+
+              <Popup trigger={<button> Recipe Info</button>} position="right center">
+                <div className="popup">Content here</div>
+              </Popup>
 
               {/* <h2>INGREDIENTS</h2>
               {recipe.ingredients.map((ing) => {

@@ -76,3 +76,12 @@
   justify-content: space-around;
 
 }
+
+.popup {
+  height: 400px;
+  width: 300px;
+  background-color: red;
+  position: relative;
+  top: 300px;
+  left:
+}
