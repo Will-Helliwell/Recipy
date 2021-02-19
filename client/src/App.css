@@ -57,12 +57,13 @@
   color: rgb(48, 76, 44);
   background-color: rgba(255, 255, 255, 0.757);
   width: 300px;
-  height: 350px;
+  height: 400px;
   padding: 15px;
   margin-bottom: 20px;
   overflow-y: hidden;
   border-radius: 5px;
-  box-shadow: black;
+  box-shadow: 5px 5px 5px #00000049;
+  box-sizing: border-box;
 }
 
 .recipe-image {
@@ -76,14 +77,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
 }
 
-.popup {
-  height: 400px;
-  width: 300px;
-  background-color: red;
-  position: relative;
-  top: 300px;
-  left:
+.popup-container {
+  height: 80%;
+  width: 50%;
+  background-color: rgb(3, 189, 74);
+  position: center;
+}
+
+.popup.recipe-image {
+  position: absolute;
+  top: 15px;
+  left: 30%;
+  /* .center; */
 }

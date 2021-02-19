@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, cloneElement } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Popup from "reactjs-popup";
 
 const RecipeList = ({ selectedIngredients }) => {
@@ -13,8 +13,9 @@ const RecipeList = ({ selectedIngredients }) => {
     })
       .then((response) => response.json())
       .then((result) => {
-        let recipe = result.filter(entry => entry.author == "Esther Clark") // Created after X
-                   .slice(0, 10);
+        let recipe = result
+          .filter((entry) => entry.author == "Esther Clark") // Created after X
+          .slice(0, 10);
         setRecipes(recipe);
         console.log("Success:", result);
       });
@@ -52,14 +53,45 @@ const RecipeList = ({ selectedIngredients }) => {
       <>
         {filteredRecipes.map((recipe) => {
           return (
-            <div className='recipe-card'>
+            <div className="recipe-card">
               <img className="recipe-image" src={recipe.image}></img>
               <p className="recipe-name"> {recipe.name}</p>
               <p className="recipe-summary"> {recipe.summary}</p>
-              <p className="time-text">Cook: {recipe.time.cook} Prep: {recipe.time.prep}</p>
+              <p className="time-text">
+                Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+              </p>
 
-              <Popup trigger={<button> Recipe Info</button>} position="top center">
-                <div className="popup">Content here</div>
+              <Popup
+                trigger={<button> Recipe Info</button>}
+                position="top center"
+              >
+                <div className="popup-container">
+                  <img className="popup recipe-image" src={recipe.image}></img>
+                  <p className="popup recipe-name"> {recipe.name}</p>
+                  <p className="popup recipe-summary"> {recipe.summary}</p>
+                  <p className="popup time-text">
+                    Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                  </p>
+                  <h2>INGREDIENTS</h2>
+                  {recipe.ingredients.map((ing) => {
+                    return (
+                      <>
+                        <li>{ing}</li>
+                      </>
+                    );
+                  })}
+                  <h2>INSTRUCTIONS</h2>
+                  {recipe.instructions.map((steps) => {
+                    return (
+                      <ul>
+                        <li>{steps}</li>
+                      </ul>
+                    );
+                  })}
+                  <h2>Time</h2>
+                  <p>Cook: {recipe.time.cook}</p>
+                  <p>Prep: {recipe.time.prep}</p>
+                </div>
               </Popup>
 
               {/* <h2>INGREDIENTS</h2>
