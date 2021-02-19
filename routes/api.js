@@ -4,7 +4,7 @@ const Todo = require('../models/recipy');
 
 router.get('/todos', (req, res, next) => {
 
-var paginate = 20;
+var paginate = 2;
 var pageNumber = 1;
 
 Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
@@ -19,7 +19,7 @@ router.post('/todos', (req, res, next) => {
       .then(data => res.json(data))
       .catch(next)
   } else if (req.body.page) {
-      pageNumber ++ 
+      pageNumber ++
         // .then(data => res.json(data))
         // .catch(next)
         console.log("pageNumber ")

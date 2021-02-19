@@ -3,7 +3,7 @@ import React from 'react'
 const NextPage = ({ currentPage, setCurrentPage }) => {
 
 
-    // const dataRequest = (URL, methodType, params) => { 
+    // const dataRequest = (URL, methodType, params) => {
     //     return fetch(URL, {
     //       method: 'POST',
     //       headers: {
@@ -19,13 +19,16 @@ const NextPage = ({ currentPage, setCurrentPage }) => {
     //         return err
     //       })
     //   }
- 
+
      const sendPage = (currentPage) => {
-        fetch(`http://localhost:5000/todos`, {
+        console.log(currentPage)
+        fetch('http://localhost:5000/api/todos', {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              body: JSON.stringify(currentPage)
+              body: JSON.stringify({
+                page: currentPage
+              })
             },
           })
             .then((response) => response.json())

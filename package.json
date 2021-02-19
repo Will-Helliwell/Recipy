@@ -23,6 +23,7 @@
   "homepage": "https://github.com/AJSMonty/Recipy#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.3",

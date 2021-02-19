@@ -5,10 +5,14 @@ const routes = require("./routes/api");
 const path = require("path");
 require("dotenv").config();
 
+var cors = require('cors')
+
 console.log("inside index.js script")
 console.log(process.env.NODE_ENV)
 
 const app = express();
+app.use(cors())
+
 
 const port = process.env.PORT || 5000;
 
