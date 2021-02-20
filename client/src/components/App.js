@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "../App.css";
 import RecipeList from "./recipes/RecipeList";
@@ -29,17 +29,21 @@ function App() {
   // Object.entries [['key', 'value'], ['key', 'value]]
   // console.log("selectedIngredients", selectedIngredients);
 
+
+
+
   return (
     <div className="App">
+      <NextPage
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
       <IngredientList
         ingredients={ingredients}
         setIngredients={setIngredients}
       />
       <RecipeList selectedIngredients={selectedIngredients} />
-      <NextPage
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      
     
     </div>
   );

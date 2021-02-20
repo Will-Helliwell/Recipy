@@ -13,7 +13,8 @@ const NextPage = ({ currentPage, setCurrentPage }) => {
               })
             },
           })
-            .then((response) => response.json())
+            .then((response) => response.json()
+            )
             .then((result) => {
               console.log("Success:", result);
             });
