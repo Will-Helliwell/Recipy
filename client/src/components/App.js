@@ -5,6 +5,7 @@ import RecipeList from "./recipes/RecipeList";
 import IngredientList from "./ingredients/IngredientList";
 import NextPage from "./nextPage";
 
+
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [ingredients, setIngredients] = useState({});
@@ -27,6 +28,7 @@ function App() {
   // Object.keys ['key', 'key', 'key']
   // Object.entries [['key', 'value'], ['key', 'value]]
   // console.log("selectedIngredients", selectedIngredients);
+
   return (
     <div className="App">
       <IngredientList
@@ -38,6 +40,7 @@ function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
+    
     </div>
   );
 }
