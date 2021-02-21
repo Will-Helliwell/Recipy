@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useMemo, cloneElement } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import NextPage from "./nextPage";
 const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pages, setPage] = useState([]);
 
   const getRecipes = () => {
     fetch(`http://localhost:5000/api/todos`, {
@@ -15,6 +16,8 @@ const RecipeList = ({ selectedIngredients }) => {
       .then((result) => {
         setRecipes(result);
         console.log("Success:", result);
+        sendPage(currentPage)
+        
       });
   };
 
@@ -33,14 +36,19 @@ const RecipeList = ({ selectedIngredients }) => {
         .then((response) => response.json()
         )
         .then((result) => {
+          // getRecipes()
+          setPage(result);
+                  // variable = result
+                  console.log("Success:", result);
+                  if (!result.length) return "no more result";
+            result.map((recipe) => {
+                console.log(recipe.name)
+                return result
+              })
+            })}
 
-          // variable = result
-          console.log("Success:", result);
-        });
-  }
 
   useEffect(getRecipes, []);
-
   // Good for performance as it only recalculates upon dependency changes
   const filteredRecipes = useMemo(() => {
     // Return the original list of recipes if no ingredients are selected
@@ -66,10 +74,32 @@ const RecipeList = ({ selectedIngredients }) => {
     return filteredRecipes;
   }, [selectedIngredients, recipes]);
 
+
+
+
+
+  const filteredPages = useMemo(() => {
+    const filteredPages = recipes.reduce((all, recipe) => {
+      const doesIngredientExist = recipe.ingredients.find((item) => {
+        const checkedIngredients = selectedIngredients.find((selectedItem) => {
+          return item.includes(selectedItem.toLowerCase());
+        });
+        return checkedIngredients;
+      });
+     
+      if (doesIngredientExist) {
+        return [...all, recipe];
+      }
+      return all;
+    }, []);
+    return filteredPages;
+  }, [selectedIngredients, recipes]);
+
+  // --------------
   return (
     <>
       <>
-        {filteredRecipes.map((recipe) => {
+        {filteredPages.map((recipe) => {
           return (
             <>
               <img src={recipe.image}></img>
@@ -98,6 +128,16 @@ const RecipeList = ({ selectedIngredients }) => {
           );
         })}
       </>
+      <>
+      {pages.map((recipe) => {
+      return (
+        <>
+        <p> {recipe.name}</p>
+        </>
+        );
+      })}
+</>
+  
       <NextPage
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
