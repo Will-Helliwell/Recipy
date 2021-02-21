@@ -4,8 +4,7 @@ const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPage] = useState([]);
-  const [results, setResult] = useState([]);
-  const [newRecipes, setNewrecipes] = useState([]);
+
   const getRecipes = () => {
     fetch(`http://localhost:5000/api/todos`, {
       method: "GET",
@@ -16,9 +15,6 @@ const RecipeList = ({ selectedIngredients }) => {
       .then((response) => response.json())
       .then((result) => {
         setRecipes(result);
-      // setNewrecipes(result)
-      // setResult({...result})
-
       });
   };
 
@@ -38,14 +34,8 @@ const RecipeList = ({ selectedIngredients }) => {
         .then((response) => response.json()
         )
         .then((result) => {
-          // getRecipes()
-          // setResult({...result})
-          // console.log("setResult(newRecipes)",  setResult({...result}))
-          // setPage(result);
-          // setResult(result)
-                  // variable = result
                   setPage(result)
-console.log(result)
+                console.log(result)
             })}
 
 
@@ -76,29 +66,8 @@ console.log(result)
   }, [selectedIngredients, pages]);
 
 
-
-
-
-  // const filteredPages = useMemo(() => {
-  //   const filteredPages = results.reduce((all, result) => {
-  //     const doesIngredientExist = result.ingredients.find((item) => {
-  //       const checkedIngredients = selectedIngredients.find((selectedItem) => {
-  //         return item.includes(selectedItem.toLowerCase());
-  //       });
-  //       return checkedIngredients;
-  //     });
-     
-  //     if (doesIngredientExist) {
-  //       return [...all, result];
-  //     }
-  //     return all;
-  //   }, []);
-  //   return filteredPages;
-  // }, [selectedIngredients, results]);
-
-  // --------------
   return (
-    <>
+    <> 
      <>
         {filteredRecipes.map((recipe) => {
           return (
