@@ -1,13 +1,15 @@
 const express = require ('express');
-// const app = experess();
+// const app = express();
 // app.use(express.json())
 const router = express.Router();
 const Todo = require('../models/recipy');
 
 router.get('/todos', (req, res, next) => {
 
-// .skip((pageNumber-1)*paginate).limit(paginate)
-Todo.find({})
+const paginate = 2;
+var pageNumber = 1;
+
+Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
           //this will return all the data, exposing only the id and action field to the client
         .then((data) => res.json(data))
         .catch(next);
@@ -20,13 +22,11 @@ router.post('/todos', (req, res, next) => {
       .catch(next)
 
   }  else if (req.body.page) {
-    var paginate = 2;
     const pageNumber = req.body.page ? parseInt(req.body.page) : 1;
     Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
         .then(data => {
-          console.log(data)
             res.status(200).send({
-                // "page": data
+                page: currentPage
             })
         })} else {
     res.json({
