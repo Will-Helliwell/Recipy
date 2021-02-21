@@ -33,6 +33,8 @@ const RecipeList = ({ selectedIngredients }) => {
         .then((response) => response.json()
         )
         .then((result) => {
+
+          // variable = result
           console.log("Success:", result);
         });
   }
@@ -99,7 +101,7 @@ const RecipeList = ({ selectedIngredients }) => {
       <NextPage
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        sendPage={sendPage}
+        sendPage = {sendPage}
       />
     </>
   );

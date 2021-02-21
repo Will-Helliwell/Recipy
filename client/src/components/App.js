@@ -38,11 +38,7 @@ function App() {
         ingredients={ingredients}
         setIngredients={setIngredients}
       />
-      <RecipeList 
-      selectedIngredients={selectedIngredients} 
-      />
-      
-    
+      <RecipeList selectedIngredients={selectedIngredients} />
     </div>
   );
 }

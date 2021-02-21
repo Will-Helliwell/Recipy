@@ -1,12 +1,12 @@
 const express = require ('express');
-// const app = express();
+// const app = experess();
 // app.use(express.json())
 const router = express.Router();
 const Todo = require('../models/recipy');
 
 router.get('/todos', (req, res, next) => {
 
-const paginate = 2;
+var paginate = 2;
 var pageNumber = 1;
 
 Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
@@ -22,13 +22,11 @@ router.post('/todos', (req, res, next) => {
       .catch(next)
 
   }  else if (req.body.page) {
+    var paginate = 2;
     const pageNumber = req.body.page ? parseInt(req.body.page) : 1;
     Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
-        .then(data => {
-            res.status(200).send({
-                page: currentPage
-            })
-        })} else {
+    .then((data) => res.json(data))
+      } else {
     res.json({
       error: "The input field is empty"
     })
