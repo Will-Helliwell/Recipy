@@ -129,19 +129,6 @@ console.log(result)
           );
         })}
       </>
-      <>
-      {pages.map((recipe) => {
-      return (
-        <>
-        <p> {recipe.name}</p>
-        </>
-        );
-      })}
-</>
-
-  
-
-    
       <NextPage
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
