@@ -15,9 +15,9 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-const testDB = require("../config/keys").mongoTEST;
-const devDB = require("../config/keys").mongoDEV;
-const prodDB = require("../config/keys").mongoPROD;
+const testDB = require("./config/keys").mongoTEST;
+const devDB = require("./config/keys").mongoDEV;
+const prodDB = require("./config/keys").mongoPROD;
 
 
 //connect to the database
