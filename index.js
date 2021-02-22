@@ -5,14 +5,13 @@ const routes = require("./routes/api");
 const path = require("path");
 require("dotenv").config();
 
-var cors = require('cors')
+const cors = require("cors");
 
-console.log("inside index.js script")
-console.log(process.env.NODE_ENV)
+console.log("inside index.js script");
+console.log(process.env.NODE_ENV);
 
 const app = express();
-app.use(cors())
-
+app.use(cors());
 
 const port = process.env.PORT || 5000;
 
@@ -23,7 +22,7 @@ if (process.env.NODE_ENV == "test") {
     .connect(process.env.RECIPY_TEST, { useNewUrlParser: true })
     .then(() => console.log(`Test Database connected successfully`))
     .catch((err) => console.log(err));
-} else if (process.env.NODE_ENV == "development"){
+} else if (process.env.NODE_ENV == "development") {
   console.log("DEV IS WORKING", process.env.NODE_ENV);
   mongoose
     .connect(process.env.RECIPY_DEV, { useNewUrlParser: true })
