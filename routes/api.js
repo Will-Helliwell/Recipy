@@ -25,7 +25,8 @@ router.post('/todos', (req, res, next) => {
     .then((data) => res.json(data))
   } else if (req.body.ingredient) {
     console.log("in filter button route")
-    Todo.find({ ingredients: "4 eggs" })
+    Todo.find({ "$and": [ {ingredients: {$regex : ".*banana.*"}}, {ingredients: {$regex: ".*butter.*"}} ]})
+    .then((data) => res.json(data))
   } else {
     console.log("in error route")
     res.json({
