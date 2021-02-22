@@ -5,30 +5,35 @@ const routes = require("./routes/api");
 const path = require("path");
 require("dotenv").config();
 
-console.log("inside index.js script")
+console.log("inside server.js script")
 console.log(process.env.NODE_ENV)
 
 const app = express();
 
 const port = process.env.PORT || 5000;
 
+const testDB = require("./config/keys").mongoTEST;
+const devDB = require("./config/keys").mongoDEV;
+const prodDB = require("./config/keys").mongoPROD;
+
+
 //connect to the database
 if (process.env.NODE_ENV == "test") {
   console.log("TEST DB IS WORKING", process.env.NODE_ENV);
   mongoose
-    .connect(process.env.RECIPY_TEST, { useNewUrlParser: true })
+    .connect(testDB, { useNewUrlParser: true })
     .then(() => console.log(`Test Database connected successfully`))
     .catch((err) => console.log(err));
 } else if (process.env.NODE_ENV == "development"){
   console.log("DEV IS WORKING", process.env.NODE_ENV);
   mongoose
-    .connect(process.env.RECIPY_DEV, { useNewUrlParser: true })
+    .connect(devDB, { useNewUrlParser: true })
     .then(() => console.log(`Dev Database connected successfully`))
     .catch((err) => console.log(err));
 } else {
   console.log("PROD IS WORKING", process.env.NODE_ENV);
   mongoose
-    .connect(process.env.RECIPY_PROD, { useNewUrlParser: true })
+    .connect(prodDB, { useNewUrlParser: true })
     .then(() => console.log(`Prod Database connected successfully`))
     .catch((err) => console.log(err));
 }
