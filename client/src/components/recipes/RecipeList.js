@@ -3,7 +3,6 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  cloneElement,
   useCallback,
 } from "react";
 
@@ -29,23 +28,37 @@ const RecipeList = ({ selectedIngredients }) => {
     [loading, hasMore]
   );
 
-  const getRecipes = () => {
-    fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
       .then((response) => response.json())
       .then(({ totalPages, totalRecipes, recipes }) => {
         console.log(totalPages, totalRecipes, recipes);
-        setRecipes(recipes);
-        setHasMore(totalRecipes.length > 0);
+        setRecipes((state) => {
+          console.log("state", state);
+          return [...state, ...recipes];
+        });
+        setHasMore(recipes.length > 0);
         setLoading(false);
       });
-  };
+  }, [pageNumber]);
 
-  useEffect(getRecipes, [selectedIngredients, pageNumber]);
+  // const getRecipes = () => {
+  //   fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then(({ totalPages, totalRecipes, recipes }) => {
+  //       console.log(totalPages, totalRecipes, recipes);
+  //       setRecipes(recipes);
+  //       setHasMore(totalRecipes.length > 0);
+  //       setLoading(false);
+  //     });
+  // };
+
+  // useEffect(getRecipes, [selectedIngredients, pageNumber]);
 
   // Good for performance as it only recalculates upon dependency changes
   const filteredRecipes = useMemo(() => {
@@ -71,6 +84,9 @@ const RecipeList = ({ selectedIngredients }) => {
     }, []);
     return filteredRecipes;
   }, [selectedIngredients, recipes]);
+
+  console.log("recipes", recipes.length && JSON.stringify(recipes[0]));
+  console.log("filteredRecipes", filteredRecipes);
 
   return (
     <>
