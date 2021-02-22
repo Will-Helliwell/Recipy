@@ -4,12 +4,14 @@
   "description": "## Spec",
   "main": "server.js",
   "scripts": {
+    "client-install": "npm install --prefix client",
     "test": "export NODE_ENV=test && jasmine",
-    "start": "node server.js",
+    "start": " node server.js",
     "server": "nodemon server.js",
     "dev-start": "export NODE_ENV=development && node server.js",
     "start-watch": "nodemon server.js",
-    "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\""
+    "client": "npm start --prefix client",
+    "dev": "export NODE_ENV=development && concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -23,16 +25,23 @@
   },
   "homepage": "https://github.com/AJSMonty/Recipy#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "classnames": "^2.2.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.15",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "validator": "^13.5.2"
   },
   "devDependencies": {

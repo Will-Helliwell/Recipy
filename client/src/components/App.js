@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "../App.css";
 import RecipeList from "./recipes/RecipeList";
 import IngredientList from "./ingredients/IngredientList";
-import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
+import Navbar from "./layout/Navbar";
+import Landing from "./layout/Landing";
+import Register from "./auth/Register";
+import Login from "./auth/Login";
 
 function App() {
   const [ingredients, setIngredients] = useState({});
@@ -28,15 +30,22 @@ function App() {
   // Object.entries [['key', 'value'], ['key', 'value]]
   console.log("selectedIngredients", selectedIngredients);
   return (
+    <Router>
     <div className="App">
+  
         <Navbar />
-        <Landing />
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
+
       <IngredientList
         ingredients={ingredients}
         setIngredients={setIngredients}
       />
       <RecipeList selectedIngredients={selectedIngredients} />
+ 
     </div>
+    </Router>
   );
 }
 
