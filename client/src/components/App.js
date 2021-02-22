@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import "../App.css";
 import RecipeList from "./recipes/RecipeList";
 import IngredientList from "./ingredients/IngredientList";
+import Navbar from "./components/layout/Navbar";
+import Landing from "./components/layout/Landing";
 
 function App() {
   const [ingredients, setIngredients] = useState({});
@@ -27,6 +29,8 @@ function App() {
   console.log("selectedIngredients", selectedIngredients);
   return (
     <div className="App">
+        <Navbar />
+        <Landing />
       <IngredientList
         ingredients={ingredients}
         setIngredients={setIngredients}
