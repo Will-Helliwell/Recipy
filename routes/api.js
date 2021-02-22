@@ -21,7 +21,12 @@ router.post('/todos', (req, res, next) => {
     const pageNumber = parseInt(req.body.page);
     Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
     .then((data) => res.json(data))
-      } else {
+  } else if (req.body.ingredient) {
+    // return "ingredient param recognised by post route"
+    var paginate = 1;
+    Todo.find({}).skip((3)*paginate).limit(paginate)
+    .then((data) => res.json(data))
+  } else {
     res.json({
       error: "The input field is empty"
     })
