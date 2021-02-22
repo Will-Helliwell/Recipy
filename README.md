@@ -75,13 +75,4 @@ As a user
 So that I can easily see the meals I have planned
 I would like to keep a list of meals I have shopped for
 
-As a user
-So i could choose what to cook from what ingredients i have
-I would like to filter recipes that have the ingredients i want to use
-
-As a user
-So i dont have to go buy more ingredients
-I would like a list of recipes for the ingredients that i have in my house
-
-
 ```

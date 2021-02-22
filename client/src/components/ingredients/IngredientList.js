@@ -1,5 +1,6 @@
 import React from "react";
 import Categories from "./Categories";
+import FilterButton from "./filterButton"
 
 const IngredientList = ({ ingredients, setIngredients }) => {
   const options = ["Dairy", "Vegetables", "Fruits", "Meats", "Seafood", "Fish"];
@@ -14,6 +15,7 @@ const IngredientList = ({ ingredients, setIngredients }) => {
           />
         );
       })}
+      <FilterButton/>
     </div>
   );
 };
