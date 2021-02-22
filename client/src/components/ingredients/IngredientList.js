@@ -1,5 +1,7 @@
 import React from "react";
 import Categories from "./Categories";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 const IngredientList = ({ ingredients, setIngredients }) => {
   const options = ["Dairy", "Vegetables", "Fruits", "Meats", "Seafood", "Fish"];
