@@ -4,7 +4,6 @@ import "../App.css";
 import RecipeList from "./recipes/RecipeList";
 import IngredientList from "./ingredients/IngredientList";
 
-
 function App() {
   
   const [ingredients, setIngredients] = useState({});
@@ -38,8 +37,11 @@ function App() {
         ingredients={ingredients}
         setIngredients={setIngredients}
       />
-      <RecipeList 
-      selectedIngredients={selectedIngredients}/>
+      <RecipeList selectedIngredients={selectedIngredients} />
+      {/* <NextPage
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      /> */}
     </div>
   );
 }
