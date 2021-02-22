@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "../App.css";
 import RecipeList from "./recipes/RecipeList";
 import IngredientList from "./ingredients/IngredientList";
-import NextPage from "./nextPage";
+
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(1);
+  
   const [ingredients, setIngredients] = useState({});
   const selectedIngredients = Object.values(ingredients).reduce(
     (selectedIngredients, next) => {
@@ -27,17 +27,19 @@ function App() {
   // Object.keys ['key', 'key', 'key']
   // Object.entries [['key', 'value'], ['key', 'value]]
   // console.log("selectedIngredients", selectedIngredients);
+
+
+
+
   return (
     <div className="App">
+
       <IngredientList
         ingredients={ingredients}
         setIngredients={setIngredients}
       />
-      <RecipeList selectedIngredients={selectedIngredients} />
-      <NextPage
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      <RecipeList 
+      selectedIngredients={selectedIngredients}/>
     </div>
   );
 }

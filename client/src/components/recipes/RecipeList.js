@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useMemo, cloneElement } from "react";
-
+import React, { useState, useEffect, useMemo } from "react";
+import NextPage from "./nextPage";
 const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pages, setPage] = useState([]);
 
   const getRecipes = () => {
     fetch(`http://localhost:5000/api/todos`, {
@@ -13,18 +15,37 @@ const RecipeList = ({ selectedIngredients }) => {
       .then((response) => response.json())
       .then((result) => {
         setRecipes(result);
-        console.log("Success:", result);
       });
   };
 
-  useEffect(getRecipes, []);
 
+  const sendPage = (currentPage) => {
+    console.log(currentPage)
+    fetch('http://localhost:5000/api/todos', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          
+          },
+        body: JSON.stringify({
+          page: currentPage
+        })
+      })
+        .then((response) => response.json()
+        )
+        .then((result) => {
+                  setPage(result)
+                console.log(result)
+            })}
+
+
+  useEffect(getRecipes, []);
   // Good for performance as it only recalculates upon dependency changes
   const filteredRecipes = useMemo(() => {
     // Return the original list of recipes if no ingredients are selected
-    if (!selectedIngredients.length) return recipes;
+    if (!selectedIngredients.length) return pages;
     // Loop through the recipes
-    const filteredRecipes = recipes.reduce((all, recipe) => {
+    const filteredRecipes = pages.reduce((all, recipe) => {
       // Because recipe.ingredients is an array we also have to loop through that
       // in this case we're using find
       const doesIngredientExist = recipe.ingredients.find((item) => {
@@ -42,11 +63,12 @@ const RecipeList = ({ selectedIngredients }) => {
       return all;
     }, []);
     return filteredRecipes;
-  }, [selectedIngredients, recipes]);
+  }, [selectedIngredients, pages]);
+
 
   return (
-    <>
-      <>
+    <> 
+     <>
         {filteredRecipes.map((recipe) => {
           return (
             <>
@@ -76,8 +98,15 @@ const RecipeList = ({ selectedIngredients }) => {
           );
         })}
       </>
+      <NextPage
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        sendPage = {sendPage}
+      />
     </>
   );
 };
 
 export default RecipeList;
+
+
