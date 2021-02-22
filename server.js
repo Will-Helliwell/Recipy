@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const routes = require("./routes/api");
 const path = require("path");
 require("dotenv").config();
+const passport = require("passport");
+const users = require("./routes/users");
+
 
 console.log("inside server.js script")
 console.log(process.env.NODE_ENV)
@@ -12,9 +15,9 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-const testDB = require("./config/keys").mongoTEST;
-const devDB = require("./config/keys").mongoDEV;
-const prodDB = require("./config/keys").mongoPROD;
+const testDB = require("../config/keys").mongoTEST;
+const devDB = require("../config/keys").mongoDEV;
+const prodDB = require("../config/keys").mongoPROD;
 
 
 //connect to the database
@@ -66,3 +69,10 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+// Routes
+app.use("/api/users", users);
