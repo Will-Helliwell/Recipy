@@ -115,5 +115,3 @@ dist
 .yarn/install-state.gz
 .pnp.*
 >>>>>>> 5c20b9077d348533fd12473dea5e3b5498a9fb01
-
-spotify-api/
