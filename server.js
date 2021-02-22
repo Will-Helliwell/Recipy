@@ -76,3 +76,5 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
+
+// made some changes to routes

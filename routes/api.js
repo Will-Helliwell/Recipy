@@ -29,3 +29,5 @@ router.delete('/todos/:id', (req, res, next) => {
 })
 
 module.exports = router;
+
+// made some changes to routes

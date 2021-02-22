@@ -22,3 +22,5 @@ const UserSchema = new Schema({
 
 const User = mongoose.model("users", UserSchema);
 module.exports = User;
+
+// made some changes to routes

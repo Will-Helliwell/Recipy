@@ -128,3 +128,5 @@ router.post("/login", (req, res) => {
   });
 
   module.exports = router;
+
+  // made some changes to routes
