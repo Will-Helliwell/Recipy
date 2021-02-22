@@ -1,23 +1,51 @@
-import React, { useState, useEffect, useMemo, cloneElement } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  cloneElement,
+  useCallback,
+} from "react";
 
 const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
+
+  const observer = useRef();
+  const lastRecipeElementRef = useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          console.log("Visible", node);
+          setPageNumber((prevPageNumber) => prevPageNumber + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
 
   const getRecipes = () => {
-    fetch(`http://localhost:5000/api/todos`, {
+    fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
-      .then((result) => {
-        setRecipes(result);
-        console.log("Success:", result);
+      .then(({ totalPages, totalRecipes, recipes }) => {
+        console.log(totalPages, totalRecipes, recipes);
+        setRecipes(recipes);
+        setHasMore(totalRecipes.length > 0);
+        setLoading(false);
       });
   };
 
-  useEffect(getRecipes, []);
+  useEffect(getRecipes, [selectedIngredients, pageNumber]);
 
   // Good for performance as it only recalculates upon dependency changes
   const filteredRecipes = useMemo(() => {
@@ -47,34 +75,64 @@ const RecipeList = ({ selectedIngredients }) => {
   return (
     <>
       <>
-        {filteredRecipes.map((recipe) => {
-          return (
-            <>
-              <img src={recipe.image}></img>
-              <h2>NAME</h2>
-              <p> {recipe.name}</p>
-              <h2>INGREDIENTS</h2>
-              {recipe.ingredients.map((ing) => {
-                return (
-                  <>
-                    <li>{ing}</li>
-                  </>
-                );
-              })}
-              <h2>INSTRUCTIONS</h2>
-              {recipe.instructions.map((steps) => {
-                return (
-                  <ul>
-                    <li>{steps}</li>
-                  </ul>
-                );
-              })}
-              <h2>Time</h2>
-              <p>Cook: {recipe.time.cook}</p>
-              <p>Prep: {recipe.time.prep}</p>
-            </>
-          );
+        {filteredRecipes.map((recipe, index) => {
+          if (recipes.length === index + 1) {
+            return (
+              <div ref={lastRecipeElementRef}>
+                <img src={recipe.image}></img>
+                <h2>NAME</h2>
+                <p> {recipe.name}</p>
+                <h2>INGREDIENTS</h2>
+                {recipe.ingredients.map((ing) => {
+                  return (
+                    <>
+                      <li>{ing}</li>
+                    </>
+                  );
+                })}
+                <h2>INSTRUCTIONS</h2>
+                {recipe.instructions.map((steps) => {
+                  return (
+                    <ul>
+                      <li>{steps}</li>
+                    </ul>
+                  );
+                })}
+                <h2>Time</h2>
+                <p>Cook: {recipe.time.cook}</p>
+                <p>Prep: {recipe.time.prep}</p>
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                <img src={recipe.image}></img>
+                <h2>NAME</h2>
+                <p> {recipe.name}</p>
+                <h2>INGREDIENTS</h2>
+                {recipe.ingredients.map((ing) => {
+                  return (
+                    <>
+                      <li>{ing}</li>
+                    </>
+                  );
+                })}
+                <h2>INSTRUCTIONS</h2>
+                {recipe.instructions.map((steps) => {
+                  return (
+                    <ul>
+                      <li>{steps}</li>
+                    </ul>
+                  );
+                })}
+                <h2>Time</h2>
+                <p>Cook: {recipe.time.cook}</p>
+                <p>Prep: {recipe.time.prep}</p>
+              </div>
+            );
+          }
         })}
+        <div>{loading && "Loading..."}</div>
       </>
     </>
   );
