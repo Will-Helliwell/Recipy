@@ -25,9 +25,7 @@ router.post('/todos', (req, res, next) => {
     .then((data) => res.json(data))
   } else if (req.body.ingredient) {
     console.log("in filter button route")
-    var paginate = 1;
-    Todo.find({}).skip((3)*paginate).limit(paginate)
-    .then((data) => res.json(data))
+    Todo.find({ ingredients: "4 eggs" })
   } else {
     console.log("in error route")
     res.json({
