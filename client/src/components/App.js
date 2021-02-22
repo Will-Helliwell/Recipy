@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 
 import "../App.css";
+import Login from "./spotify/login.js"
 import RecipeList from "./recipes/RecipeList";
 import IngredientList from "./ingredients/IngredientList";
 import SpotifyWebApi from 'spotify-web-api-js';
+import SpotifyPlayer from 'react-spotify-web-playback';
 var spotifyApi = new SpotifyWebApi();
 
 function App() {
   const params = getHashParams();
   const token = params.access_token;
   const [loggedIn, setLoggedIn] = useState(token ? true : false);
-  const [nowPlaying, setNowPlaying] = useState( { name: 'Not Checked', albumArt: '' } );
-  // const [myPlaylists, setMyPlaylists] = useState
 
   if (token) {
     spotifyApi.setAccessToken(token);
+    console.log(token);
   }
 
   function getHashParams(){
@@ -27,30 +28,6 @@ function App() {
        e = r.exec(q);
     }
     return hashParams;
-  }
-
-  function getNowPlaying(){
-    spotifyApi.getMyCurrentPlaybackState()
-    .then((response) => {
-      console.log(response);
-      setNowPlaying({
-          name: response.item.name,
-          albumArt: response.item.album.images[0].url
-      });
-    })
-    .catch((error) => {
-      console.log(error)
-    });
-  }
-
-  function getPlaylist(){
-    spotifyApi.getUserPlaylists()
-    .then((response) => {
-      console.log('User playlists', response)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
   }
 
   const [ingredients, setIngredients] = useState({});
@@ -76,20 +53,11 @@ function App() {
   return (
     <div className="App">
       <div className="spotify">
-        <a href='http://localhost:8888'> Login to Spotify </a>
-        <div className="spotify-playing">
-          Now Playing: { nowPlaying.name }
-        </div>
-        <div className="spotify-art">
-          <img src={ nowPlaying.albumArt } style={{ height: 150 }}/>
-        </div>
-        <div className="spotify-button">
-          { loggedIn &&
-            <button onClick={() => getNowPlaying()}>
-            Check Now Playing
-            </button>
-          }
-        </div>
+        <Login/>
+        <SpotifyPlayer
+            token={token}
+            uris={['spotify:playlist:1VaucNthO1eR7A51BJoEtS']}
+        />
       </div>
       <IngredientList
         ingredients={ingredients}
