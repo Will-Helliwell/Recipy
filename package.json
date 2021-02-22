@@ -2,12 +2,13 @@
   "name": "final_project",
   "version": "1.0.0",
   "description": "## Spec",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "export NODE_ENV=test && jasmine",
-    "start": "node index.js",
-    "dev-start": "export NODE_ENV=development && node index.js",
-    "start-watch": "nodemon index.js",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "dev-start": "export NODE_ENV=development && node server.js",
+    "start-watch": "nodemon server.js",
     "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\""
   },
   "repository": {
@@ -22,11 +23,17 @@
   },
   "homepage": "https://github.com/AJSMonty/Recipy#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.11.15"
+    "mongoose": "^5.11.15",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "validator": "^13.5.2"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",

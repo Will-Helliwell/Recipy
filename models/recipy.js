@@ -59,6 +59,6 @@ const RecipySchema = new Schema({
 });
 
 //create model for todo
-const Todo = mongoose.model("recipes", RecipySchema);
+const Recipy = mongoose.model("recipes", RecipySchema);
 
-module.exports = Todo;
+module.exports = Recipy;
