@@ -42,31 +42,12 @@ const RecipeList = ({ selectedIngredients }) => {
       });
   }, [pageNumber]);
 
-  const sendPage = (currentPage) => {
-    console.log(currentPage)
-    fetch('http://localhost:5000/api/todos', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          
-          },
-        body: JSON.stringify({
-          page: currentPage
-        })
-      })
-        .then((response) => response.json()
-        )
-        .then((result) => {
-                  setPage(result)
-                console.log(result)
-            })}
-
   // Good for performance as it only recalculates upon dependency changes
   const filteredRecipes = useMemo(() => {
     // Return the original list of recipes if no ingredients are selected
-    if (!selectedIngredients.length) return pages;
+    if (!selectedIngredients.length) return recipes;
     // Loop through the recipes
-    const filteredRecipes = pages.reduce((all, recipe) => {
+    const filteredRecipes = recipes.reduce((all, recipe) => {
       // Because recipe.ingredients is an array we also have to loop through that
       // in this case we're using find
       const doesIngredientExist = recipe.ingredients.find((item) => {
@@ -84,11 +65,7 @@ const RecipeList = ({ selectedIngredients }) => {
       return all;
     }, []);
     return filteredRecipes;
-  }, [selectedIngredients, pages]);
-
-
-  console.log("recipes", recipes.length && JSON.stringify(recipes[0]));
-  console.log("filteredRecipes", filteredRecipes);
+  }, [selectedIngredients, recipes]);
 
   return (
     <>
@@ -152,15 +129,8 @@ const RecipeList = ({ selectedIngredients }) => {
         })}
         <div>{loading && "Loading..."}</div>
       </>
-      <NextPage
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        sendPage = {sendPage}
-      />
     </>
   );
 };
 
 export default RecipeList;
-
-
