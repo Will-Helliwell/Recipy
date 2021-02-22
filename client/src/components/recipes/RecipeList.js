@@ -42,24 +42,6 @@ const RecipeList = ({ selectedIngredients }) => {
       });
   }, [pageNumber]);
 
-  // const getRecipes = () => {
-  //   fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then(({ totalPages, totalRecipes, recipes }) => {
-  //       console.log(totalPages, totalRecipes, recipes);
-  //       setRecipes(recipes);
-  //       setHasMore(totalRecipes.length > 0);
-  //       setLoading(false);
-  //     });
-  // };
-
-  // useEffect(getRecipes, [selectedIngredients, pageNumber]);
-
   // Good for performance as it only recalculates upon dependency changes
   const filteredRecipes = useMemo(() => {
     // Return the original list of recipes if no ingredients are selected
