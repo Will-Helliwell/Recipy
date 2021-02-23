@@ -2,11 +2,8 @@ import React from 'react'
 
 const FavoriteButton = () => {
 
-
-//  onSubmit() {
-
-
-//  }
+    const { user } = this.props.auth;
+    console.log(user)
 
   return (
       <button className="addtofavorite" type="submit">
