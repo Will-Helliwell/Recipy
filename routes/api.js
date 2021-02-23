@@ -37,18 +37,17 @@ router.post("/todos", (req, res, next) => {
     console.log("in next page route");
     var paginate = 2;
     const pageNumber = parseInt(req.body.page);
-    Todo.find({})
-      .skip((pageNumber - 1) * paginate)
-      .limit(paginate)
-      .then((data) => res.json(data));
-  } else if (req.body.ingredient) {
-    console.log("in filter button route");
-    Todo.find({
-      $and: [
-        { ingredients: { $regex: ".*banana.*" } },
-        { ingredients: { $regex: ".*butter.*" } },
-      ],
-    }).then((data) => res.json(data));
+    Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
+    .then((data) => res.json(data))
+  } else if (req.body.ingredients) {
+    console.log("in filter button route")
+    let regex_array = req.body.ingredients.map( (ingredient) => `.*${ingredient}.*` )
+    let db_query_array = []
+    regex_array.forEach( (ingredient) =>
+      db_query_array.push( {ingredients: {$regex : ingredient}} )
+    )
+    Todo.find({ "$and": db_query_array})
+    .then((data) => res.json(data))
   } else {
     console.log("in error route");
     res.json({
