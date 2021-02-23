@@ -8,6 +8,7 @@ import React, {
 
 const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
@@ -29,20 +30,35 @@ const RecipeList = ({ selectedIngredients }) => {
   );
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
-      .then((response) => response.json())
-      .then(({ totalPages, totalRecipes, recipes }) => {
-        console.log(totalPages, totalRecipes, recipes);
-        setRecipes((state) => {
-          console.log("state", state);
-          return [...state, ...recipes];
+    if (filteredRecipes.length > 0) {
+      return fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
+        .then((response) => response.json())
+        .then(({ totalPages, totalFilteredRecipesCount, recipes }) => {
+          console.log(totalPages, totalFilteredRecipesCount, filteredRecipes);
+          setFilteredRecipes((state) => {
+            console.log("state", state);
+            return [...state, ...filteredRecipes];
+          });
+          setHasMore(recipes.length > 0);
+          setLoading(false);
         });
-        setHasMore(recipes.length > 0);
-        setLoading(false);
-      });
-  }, [pageNumber]);
+    } else {
+      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
+        .then((response) => response.json())
+        .then(({ totalPages, totalRecipes, recipes }) => {
+          console.log(totalPages, totalRecipes, recipes);
+          setRecipes((state) => {
+            console.log("state", state);
+            return [...state, ...recipes];
+          });
+          setHasMore(recipes.length > 0);
+          setLoading(false);
+        });
+    }
+  }, [pageNumber, filteredRecipes]);
 
   useEffect(() => {
+    if (!selectedIngredients.length) return;
     fetch(`http://localhost:5000/api/todos`, {
       method: "POST",
       body: JSON.stringify({ ingredients: selectedIngredients }),
@@ -53,11 +69,14 @@ const RecipeList = ({ selectedIngredients }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log("data", data);
+        setFilteredRecipes(data);
       })
       .catch((err) => {
         console.log("err", err);
       });
   }, [selectedIngredients]);
+
+  console.log("filteredRecipes", filteredRecipes);
 
   // Good for performance as it only recalculates upon dependency changes
   // const filteredRecipes = useMemo(() => {
