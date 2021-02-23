@@ -30,34 +30,6 @@ const RecipeList = ({ selectedIngredients }) => {
   );
 
   useEffect(() => {
-    if (filteredRecipes.length > 0) {
-      return fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
-        .then((response) => response.json())
-        .then(({ totalPages, totalFilteredRecipesCount, recipes }) => {
-          console.log(totalPages, totalFilteredRecipesCount, filteredRecipes);
-          setFilteredRecipes((state) => {
-            console.log("state", state);
-            return [...state, ...filteredRecipes];
-          });
-          setHasMore(recipes.length > 0);
-          setLoading(false);
-        });
-    } else {
-      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
-        .then((response) => response.json())
-        .then(({ totalPages, totalRecipes, recipes }) => {
-          console.log(totalPages, totalRecipes, recipes);
-          setRecipes((state) => {
-            console.log("state", state);
-            return [...state, ...recipes];
-          });
-          setHasMore(recipes.length > 0);
-          setLoading(false);
-        });
-    }
-  }, [pageNumber, filteredRecipes]);
-
-  useEffect(() => {
     if (!selectedIngredients.length) return;
     fetch(`http://localhost:5000/api/todos`, {
       method: "POST",
@@ -69,14 +41,46 @@ const RecipeList = ({ selectedIngredients }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log("data", data);
-        setFilteredRecipes(data);
+        setFilteredRecipes([data]);
       })
       .catch((err) => {
         console.log("err", err);
       });
   }, [selectedIngredients]);
 
-  console.log("filteredRecipes", filteredRecipes);
+  useEffect(() => {
+    if (filteredRecipes.length > 0) {
+        return fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
+          .then((response) => response.json())
+          .then(({ totalPages, totalFilteredRecipesCount, recipes }) => {
+            // console.log(totalPages, totalFilteredRecipesCount, filteredRecipes);
+            setFilteredRecipes((state) => {
+              // console.log("state", state);
+              return [...state, ...filteredRecipes];
+            });
+            setHasMore(recipes.length > 0);
+            setLoading(false);
+        });
+    } else {
+      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
+        .then((response) => response.json())
+        .then(({ totalPages, totalRecipes, recipes }) => {
+          // console.log(totalPages, totalRecipes, recipes);
+          setRecipes((state) => {
+            // console.log("state", state);
+            return [...state, ...recipes];
+          });
+          setHasMore(recipes.length > 0);
+          setLoading(false);
+        });
+    }
+  }, [pageNumber, filteredRecipes]);
+
+
+  console.log("filtered recipes:", filteredRecipes)
+  console.log("filtered recipes length:", filteredRecipes.length)
+
+  // console.log("filteredRecipes", filteredRecipes);
 
   // Good for performance as it only recalculates upon dependency changes
   // const filteredRecipes = useMemo(() => {
