@@ -111,7 +111,7 @@ function App() {
           <SpotifyLogin/>
           <SpotifyPlayer
               token={token}
-              uris={['spotify:playlist:1VaucNthO1eR7A51BJoEtS']}
+              uris={['https://api.spotify.com/v1/playlists/6ixPO9vfygyXHTvAXYwhFk']}
           />
           <div className="spotify-button">
             { loggedIn &&
