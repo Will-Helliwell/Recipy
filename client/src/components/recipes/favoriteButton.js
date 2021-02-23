@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 class FavoriteButton extends React.Component {
 
     handleClick(user_id) {
-        console.log("inside handleClick")
-        console.log(user_id.name);
-        console.log(user_id.id);
+        console.log("inside handleClick");
+        console.log("User Name: " + user_id.name);
+        console.log("User Id: " + user_id.id);
+        console.log("Post Id: " + this.props.post_id)
         // console.log(user2);
     };
     render() {
