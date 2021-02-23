@@ -1,15 +1,27 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const FavoriteButton = () => {
+class FavoriteButton extends React.Component {
+    render() {
 
-    const { user } = this.props.auth;
-    console.log(user)
+        console.log(this.props)
+        const { user } = this.props.auth;
+        console.log(user.name)
+        console.log(user.id)
 
   return (
-      <button className="addtofavorite" type="submit">
+      <button className="addtofavorite">
           Add to Favorites
       </button>
   )
+    }
+    
 }
 
-export default FavoriteButton
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(FavoriteButton)
