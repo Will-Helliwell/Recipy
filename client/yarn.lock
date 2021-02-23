@@ -4494,7 +4494,7 @@
 
 "follow-redirects@^1.0.0", "follow-redirects@^1.10.0":
   "integrity" "sha512-6mPTgLxYm3r6Bkkg0vNM0HTjfGrOEtsfbhagQvbxDEsEkpNhw582upBaoRZylzen6krEmxXJgt9Ju6HiI4O7BA=="
-  "resolved" "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.2.tgz"
+  "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.13.2.tgz"
   "version" "1.13.2"
 
 "for-each@^0.3.3":
@@ -9650,6 +9650,11 @@
   "version" "3.1.0"
   dependencies:
     "extend-shallow" "^3.0.0"
+
+"spotify-web-api-js@^1.5.1":
+  "integrity" "sha512-KyeYpfPY5bWc5geb0Lmw96oqydxrby36vkmN33q4xrY7oWwoz3634Ya7qHndq2eOqCfI1GS3a5CjimYe7RQdtg=="
+  "resolved" "https://registry.npmjs.org/spotify-web-api-js/-/spotify-web-api-js-1.5.1.tgz"
+  "version" "1.5.1"
 
 "sprintf-js@~1.0.2":
   "integrity" "sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw="
