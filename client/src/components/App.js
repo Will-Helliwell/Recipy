@@ -14,9 +14,14 @@ import store from "../store";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "../actions/authActions";
-
 import PrivateRoute from "./private-route/PrivateRoute";
 import Dashboard from "./dashboard/Dashboard";
+import SpotifyLogin from "./spotify/login.js"
+import SpotifyWebApi from 'spotify-web-api-js';
+import SpotifyPlayer from 'react-spotify-web-playback';
+var spotifyApi = new SpotifyWebApi();
+
+
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -107,8 +112,25 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
         </Switch>
+<<<<<<< HEAD
 
 
+=======
+        <div className="spotify">
+        <SpotifyLogin/>
+        <SpotifyPlayer
+            token={token}
+            uris={['spotify:playlist:1VaucNthO1eR7A51BJoEtS']}
+        />
+        <div className="spotify-button">
+          { loggedIn &&
+            <button onClick={() => getPlaylist()}>
+            Get My Playlists
+            </button>
+          }
+        </div>
+      </div>
+>>>>>>> 2acb7022e3850e75d5b13bd4fc3d4800e21c3cf5
       <IngredientList
         ingredients={ingredients}
         setIngredients={setIngredients}
