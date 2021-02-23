@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Popup from "reactjs-popup";
+import FavoriteButton from "./favoriteButton"
 
 const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
@@ -60,7 +61,7 @@ const RecipeList = ({ selectedIngredients }) => {
               <p className="time-text">
                 Cook: {recipe.time.cook} Prep: {recipe.time.prep}
               </p>
-
+              < FavoriteButton />
               <Popup
                 trigger={<button> Recipe Info</button>}
                 position="top center"
