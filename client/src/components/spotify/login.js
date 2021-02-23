@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Login = () => {
+const SpotifyLogin = () => {
   return (
     <div className="spotify-login">
       <a href='http://localhost:8888'> Login to Spotify </a>
@@ -8,4 +8,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default SpotifyLogin;
