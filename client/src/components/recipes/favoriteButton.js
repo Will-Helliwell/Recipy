@@ -1,10 +1,17 @@
 import React from 'react'
 
 const FavoriteButton = () => {
+
+
+//  onSubmit() {
+
+
+//  }
+
   return (
-      <div>
-          Hello
-      </div>
+      <button className="addtofavorite" type="submit">
+          Add to Favorites
+      </button>
   )
 }
 
