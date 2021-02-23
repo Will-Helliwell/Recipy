@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "../App.css";
-import Login from "./spotify/login.js"
+
 import RecipeList from "./recipes/RecipeList";
 import IngredientList from "./ingredients/IngredientList";
 
@@ -40,11 +40,6 @@ if (localStorage.jwtToken) {
     window.location.href = "./login";
   }
 }
-
-import SpotifyWebApi from 'spotify-web-api-js';
-import SpotifyPlayer from 'react-spotify-web-playback';
-var spotifyApi = new SpotifyWebApi();
-
 
 function App() {
   const params = getHashParams();
@@ -103,7 +98,6 @@ function App() {
     <Router>
     <div className="App">
 
-
         <Navbar />
         <Route exact path="/" component={Landing} />
         <Route exact path="/register" component={Register} />
@@ -112,25 +106,22 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
         </Switch>
-<<<<<<< HEAD
 
-
-=======
         <div className="spotify">
-        <SpotifyLogin/>
-        <SpotifyPlayer
-            token={token}
-            uris={['spotify:playlist:1VaucNthO1eR7A51BJoEtS']}
-        />
-        <div className="spotify-button">
-          { loggedIn &&
-            <button onClick={() => getPlaylist()}>
-            Get My Playlists
-            </button>
-          }
+          <SpotifyLogin/>
+          <SpotifyPlayer
+              token={token}
+              uris={['spotify:playlist:1VaucNthO1eR7A51BJoEtS']}
+          />
+          <div className="spotify-button">
+            { loggedIn &&
+              <button onClick={() => getPlaylist()}>
+              Get My Playlists
+              </button>
+            }
+          </div>
         </div>
-      </div>
->>>>>>> 2acb7022e3850e75d5b13bd4fc3d4800e21c3cf5
+
       <IngredientList
         ingredients={ingredients}
         setIngredients={setIngredients}
