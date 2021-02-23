@@ -13,6 +13,11 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "../actions/authActions";
 
+import Login from "./spotify/login.js"
+import SpotifyWebApi from 'spotify-web-api-js';
+import SpotifyPlayer from 'react-spotify-web-playback';
+var spotifyApi = new SpotifyWebApi();
+
 import PrivateRoute from "./private-route/PrivateRoute";
 import Dashboard from "./dashboard/Dashboard";
 // Check for token to keep user logged in
@@ -35,6 +40,37 @@ if (localStorage.jwtToken) {
 }
 
 function App() {
+  const params = getHashParams();
+  const token = params.access_token;
+  const [loggedIn, setLoggedIn] = useState(token ? true : false);
+
+  if (token) {
+    spotifyApi.setAccessToken(token);
+    console.log(token);
+  }
+
+  function getHashParams(){
+    var hashParams = {};
+    var e, r = /([^&;=]+)=?([^&;]*)/g,
+        q = window.location.hash.substring(1);
+    e = r.exec(q)
+    while (e) {
+       hashParams[e[1]] = decodeURIComponent(e[2]);
+       e = r.exec(q);
+    }
+    return hashParams;
+  }
+
+  function getPlaylist(){
+    spotifyApi.getUserPlaylists()
+    .then((response) => {
+      console.log('User playlists', response)
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  }
+
   const [ingredients, setIngredients] = useState({});
   const selectedIngredients = Object.values(ingredients).reduce(
     (selectedIngredients, next) => {
@@ -68,7 +104,20 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
         </Switch>
-
+        <div className="spotify">
+        <Login/>
+        <SpotifyPlayer
+            token={token}
+            uris={['spotify:playlist:1VaucNthO1eR7A51BJoEtS']}
+        />
+        <div className="spotify-button">
+          { loggedIn &&
+            <button onClick={() => getPlaylist()}>
+            Get My Playlists
+            </button>
+          }
+        </div>
+      </div>
       <IngredientList
         ingredients={ingredients}
         setIngredients={setIngredients}
