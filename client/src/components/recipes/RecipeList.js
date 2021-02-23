@@ -53,7 +53,7 @@ const RecipeList = ({ selectedIngredients }) => {
       <>
         {filteredRecipes.map((recipe) => {
           return (
-            <div className="recipe-card">
+            <div className="recipe-card" key={recipe._id}>
               <img className="recipe-image" src={recipe.image}></img>
               <p className="recipe-name"> {recipe.name}</p>
               <p className="recipe-summary"> {recipe.summary}</p>
