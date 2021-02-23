@@ -2,15 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 class FavoriteButton extends React.Component {
+
+    handleClick(user_id) {
+        console.log("inside handleClick")
+        console.log(user_id.name);
+        console.log(user_id.id);
+        // console.log(user2);
+    };
     render() {
-
-        console.log(this.props)
         const { user } = this.props.auth;
-        console.log(user.name)
-        console.log(user.id)
-
   return (
-      <button className="addtofavorite">
+      <button className="addtofavorite" onClick={this.handleClick.bind(this, user)}>
           Add to Favorites
       </button>
   )
