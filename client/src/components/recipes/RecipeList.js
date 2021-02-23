@@ -46,7 +46,11 @@ const RecipeList = ({ selectedIngredients }) => {
     fetch(`http://localhost:5000/api/todos`, {
       method: "POST",
       body: JSON.stringify({ ingredients: selectedIngredients }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
+      .then((response) => response.json())
       .then((data) => {
         console.log("data", data);
       })
