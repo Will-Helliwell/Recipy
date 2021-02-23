@@ -30,6 +30,16 @@ function App() {
     return hashParams;
   }
 
+  function getPlaylist(){
+    spotifyApi.getUserPlaylists()
+    .then((response) => {
+      console.log('User playlists', response)
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  }
+
   const [ingredients, setIngredients] = useState({});
   const selectedIngredients = Object.values(ingredients).reduce(
     (selectedIngredients, next) => {
@@ -58,6 +68,13 @@ function App() {
             token={token}
             uris={['spotify:playlist:1VaucNthO1eR7A51BJoEtS']}
         />
+        <div className="spotify-button">
+          { loggedIn &&
+            <button onClick={() => getPlaylist()}>
+            Get My Playlists
+            </button>
+          }
+        </div>
       </div>
       <IngredientList
         ingredients={ingredients}
