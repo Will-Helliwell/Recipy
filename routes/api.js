@@ -41,11 +41,12 @@ router.post("/todos", (req, res, next) => {
     .then((data) => res.json(data))
   } else if (req.body.ingredients) {
     console.log("in filter button route")
-    let regex_array = req.body.ingredients.map( (ingredient) => `.*${ingredient}.*` )
+    let regex_array = req.body.ingredients.map( (ingredient) => new RegExp(`.*${ingredient}.*`, 'i') )
     let db_query_array = []
     regex_array.forEach( (ingredient) =>
       db_query_array.push( {ingredients: {$regex : ingredient}} )
     )
+    console.log(db_query_array)
     Todo.find({ "$and": db_query_array})
     .then((data) => res.json(data))
   } else {
