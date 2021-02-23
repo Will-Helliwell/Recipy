@@ -16,23 +16,25 @@ router.get("/todos", async (req, res, next) => {
   });
 });
 
-router.get('/todos', (req, res, next) => {
-var paginate = 2;
-var pageNumber = 1;
-Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
-          //this will return all the data, exposing only the id and action field to the client
-        .then((data) => res.json(data))
-        .catch(next);
+router.get("/todos", (req, res, next) => {
+  var paginate = 2;
+  var pageNumber = 1;
+  Todo.find({})
+    .skip((pageNumber - 1) * paginate)
+    .limit(paginate)
+    //this will return all the data, exposing only the id and action field to the client
+    .then((data) => res.json(data))
+    .catch(next);
 });
 
-router.post('/todos', (req, res, next) => {
-  if(req.body.action){
-    console.log("in add recipe route")
+router.post("/todos", (req, res, next) => {
+  if (req.body.action) {
+    console.log("in add recipe route");
     Todo.create(req.body)
       .then((data) => res.json(data))
       .catch(next);
   } else if (req.body.page) {
-    console.log("in next page route")
+    console.log("in next page route");
     var paginate = 2;
     const pageNumber = parseInt(req.body.page);
     Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
@@ -47,17 +49,17 @@ router.post('/todos', (req, res, next) => {
     Todo.find({ "$and": db_query_array})
     .then((data) => res.json(data))
   } else {
-    console.log("in error route")
+    console.log("in error route");
     res.json({
       error: "The input field is empty",
     });
   }
 });
 
-router.delete('/todos/:id', (req, res, next) => {
-  Todo.findOneAndDelete({"_id": req.params.id})
-    .then(data => res.json(data))
-    .catch(next)
-})
+router.delete("/todos/:id", (req, res, next) => {
+  Todo.findOneAndDelete({ _id: req.params.id })
+    .then((data) => res.json(data))
+    .catch(next);
+});
 
 module.exports = router;
