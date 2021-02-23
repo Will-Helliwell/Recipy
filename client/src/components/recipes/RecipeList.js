@@ -68,6 +68,7 @@ const RecipeList = ({ selectedIngredients }) => {
                 <div className="popup-container">
                   <img className="popup recipe-image" src={recipe.image}></img>
                   <p className="popup recipe-name"> {recipe.name}</p>
+                  <p className="popup recipe-author"> {recipe.author}</p>
                   <p className="popup recipe-summary"> {recipe.summary}</p>
                   <p className="popup time-text">
                     Cook: {recipe.time.cook} Prep: {recipe.time.prep}
@@ -93,26 +94,6 @@ const RecipeList = ({ selectedIngredients }) => {
                   <p>Prep: {recipe.time.prep}</p>
                 </div>
               </Popup>
-
-              {/* <h2>INGREDIENTS</h2>
-              {recipe.ingredients.map((ing) => {
-                return (
-                  <>
-                    <li>{ing}</li>
-                  </>
-                );
-              })}
-              <h2>INSTRUCTIONS</h2>
-              {recipe.instructions.map((steps) => {
-                return (
-                  <ul>
-                    <li>{steps}</li>
-                  </ul>
-                );
-              })}
-              <h2>Time</h2>
-              <p>Cook: {recipe.time.cook}</p>
-              <p>Prep: {recipe.time.prep}</p> */}
             </div>
           );
         })}
