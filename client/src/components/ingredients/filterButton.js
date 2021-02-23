@@ -6,7 +6,7 @@ const FilterButton = () => {
         console.log("Button Working!")
         fetch('http://localhost:5000/api/todos', {
             method: "POST",
-            body: JSON.stringify({ingredient: "fishface"}),
+            body: JSON.stringify({ingredients: ["chicken", "sweetcorn"]}),
             headers: {
               "Content-Type": "application/json",
             },

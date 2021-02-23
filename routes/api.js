@@ -37,9 +37,19 @@ router.post('/todos', (req, res, next) => {
     const pageNumber = parseInt(req.body.page);
     Todo.find({}).skip((pageNumber-1)*paginate).limit(paginate)
     .then((data) => res.json(data))
-  } else if (req.body.ingredient) {
+  } else if (req.body.ingredients) {
     console.log("in filter button route")
-    Todo.find({ "$and": [ {ingredients: {$regex : ".*banana.*"}}, {ingredients: {$regex: ".*butter.*"}} ]})
+    let mapped = req.body.ingredients.map( (ingredient) => `.*${ingredient}.*` )
+    let regex_array = []
+    // console.log(mapped)
+    mapped.forEach( (ingredient) =>
+      regex_array.push( {ingredients: {$regex : ingredient}} )
+    )
+    console.log(regex_array)
+
+
+    // let regex_hash = [ {ingredients: {$regex : ".*banana.*"}}, {ingredients: {$regex: ".*butter.*"}} ]
+    Todo.find({ "$and": regex_array})
     .then((data) => res.json(data))
   } else {
     console.log("in error route")
