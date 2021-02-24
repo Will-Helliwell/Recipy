@@ -7,18 +7,19 @@ require("dotenv").config();
 const passport = require("passport");
 const users = require("./routes/users");
 
+const cors = require("cors");
 
-console.log("inside server.js script")
-console.log(process.env.NODE_ENV)
+console.log("inside index.js script");
+console.log(process.env.NODE_ENV);
 
 const app = express();
+app.use(cors());
 
 const port = process.env.PORT || 5000;
 
 const testDB = require("./config/keys").mongoTEST;
 const devDB = require("./config/keys").mongoDEV;
 const prodDB = require("./config/keys").mongoPROD;
-
 
 //connect to the database
 if (process.env.NODE_ENV == "test") {
@@ -27,7 +28,7 @@ if (process.env.NODE_ENV == "test") {
     .connect(testDB, { useNewUrlParser: true })
     .then(() => console.log(`Test Database connected successfully`))
     .catch((err) => console.log(err));
-} else if (process.env.NODE_ENV == "development"){
+} else if (process.env.NODE_ENV == "development") {
   console.log("DEV IS WORKING", process.env.NODE_ENV);
   mongoose
     .connect(devDB, { useNewUrlParser: true })
@@ -54,7 +55,7 @@ app.use((req, res, next) => {
 
 app.use(
   bodyParser.urlencoded({
-    extended: false
+    extended: false,
   })
 );
 app.use(bodyParser.json());
