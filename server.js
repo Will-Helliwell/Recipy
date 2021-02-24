@@ -20,7 +20,6 @@ const testDB = require("./config/keys").mongoTEST;
 const devDB = require("./config/keys").mongoDEV;
 const prodDB = require("./config/keys").mongoPROD;
 
-
 //connect to the database
 if (process.env.NODE_ENV == "test") {
   console.log("TEST DB IS WORKING", process.env.NODE_ENV);
@@ -44,12 +43,12 @@ if (process.env.NODE_ENV == "test") {
 //since mongoose promise is depreciated, we overide it with node's promise
 mongoose.Promise = global.Promise;
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+var cors = require('cors')
+app.use(cors()) // Use this after the variable declaration
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
@@ -78,5 +77,5 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/favorites", favorites);
-
+app.listen(9999)
 // made some changes to routes

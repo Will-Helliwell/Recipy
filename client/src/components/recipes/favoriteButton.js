@@ -10,6 +10,7 @@ class FavoriteButton extends React.Component {
         console.log("User Id: " + user_id.id);
         console.log("Post: " + this.props.post)
         const addToFav = JSON.stringify({ name: user_id.name, recipe: this.props.post})
+        console.log(addToFav)
         axios
           .post("http://localhost:5000/api/favorites/addfav", addToFav)
           .then(
@@ -18,9 +19,6 @@ class FavoriteButton extends React.Component {
                 console.log(res)
             }
         );
-        // axios
-        //   .post("/api/add_to_favourites/add")
-        // console.log(user2);
     };
     render() {
         const { user } = this.props.auth;
@@ -28,9 +26,8 @@ class FavoriteButton extends React.Component {
       <button className="addtofavorite" onClick={this.handleClick.bind(this, user)}>
           Add to Favorites
       </button>
-  )
-    }
-    
+    )
+  }   
 }
 
 const mapStateToProps = (state) => {
