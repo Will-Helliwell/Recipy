@@ -30,32 +30,8 @@ const RecipeList = ({ selectedIngredients }) => {
     [loading, hasMore]
   );
 
-  // useEffect(() => {
-  //   // if checkbox ticked (selectedIngredients changes),
-  //   //then send a post request to return all filtered recipes and set filteredRecipes)
-  //   if (!selectedIngredients.length) return;
-  //   fetch(`http://localhost:5000/api/todos`, {
-  //     method: "POST",
-  //     body: JSON.stringify({ ingredients: selectedIngredients }),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log("data", data);
-  //       setFilteredRecipes(data.totalFilteredRecipes);
-  //     })
-  //     .catch((err) => {
-  //       console.log("err", err);
-  //     });
-  // }, [selectedIngredients]);
-
   useEffect(() => {
-    // if filteredRecipes changes
-
-    // and if there are any ticked checkboxes, paginate according to filtered recipes
-    // if (filteredRecipes.totalFilteredRecipes.length > 0) {
+    
     if (selectedIngredients.length > 0) {
         console.log("in filtered pagination branch")
         fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
@@ -195,6 +171,65 @@ const RecipeList = ({ selectedIngredients }) => {
         })}
         <div>{loading && "Loading..."}</div>
       </>
+      <div>
+        {filteredRecipes.map((recipe, index) => {
+          if (filteredRecipes.length === index + 1) {
+            return (
+              <div ref={lastRecipeElementRef}>
+                <img src={recipe.image}></img>
+                <h2>NAME</h2>
+                <p> {recipe.name}</p>
+                <h2>INGREDIENTS</h2>
+                {recipe.ingredients.map((ing) => {
+                  return (
+                    <>
+                      <li>{ing}</li>
+                    </>
+                  );
+                })}
+                <h2>INSTRUCTIONS</h2>
+                {recipe.instructions.map((steps) => {
+                  return (
+                    <ul>
+                      <li>{steps}</li>
+                    </ul>
+                  );
+                })}
+                <h2>Time</h2>
+                <p>Cook: {recipe.time.cook}</p>
+                <p>Prep: {recipe.time.prep}</p>
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                <img src={recipe.image}></img>
+                <h2>NAME</h2>
+                <p> {recipe.name}</p>
+                <h2>INGREDIENTS</h2>
+                {recipe.ingredients.map((ing) => {
+                  return (
+                    <>
+                      <li>{ing}</li>
+                    </>
+                  );
+                })}
+                <h2>INSTRUCTIONS</h2>
+                {recipe.instructions.map((steps) => {
+                  return (
+                    <ul>
+                      <li>{steps}</li>
+                    </ul>
+                  );
+                })}
+                <h2>Time</h2>
+                <p>Cook: {recipe.time.cook}</p>
+                <p>Prep: {recipe.time.prep}</p>
+              </div>
+            );
+          }
+        })}
+      </div>
     </>
   );
 };
