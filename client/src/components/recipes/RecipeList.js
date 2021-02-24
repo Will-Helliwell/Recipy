@@ -13,6 +13,7 @@ const RecipeList = ({ selectedIngredients }) => {
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
 
+
   const observer = useRef();
   const lastRecipeElementRef = useCallback(
     (node) => {
@@ -29,53 +30,78 @@ const RecipeList = ({ selectedIngredients }) => {
     [loading, hasMore]
   );
 
-  useEffect(() => {
-    if (!selectedIngredients.length) return;
-    fetch(`http://localhost:5000/api/todos`, {
-      method: "POST",
-      body: JSON.stringify({ ingredients: selectedIngredients }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("data", data);
-        setFilteredRecipes([data]);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  }, [selectedIngredients]);
+  // useEffect(() => {
+  //   // if checkbox ticked (selectedIngredients changes),
+  //   //then send a post request to return all filtered recipes and set filteredRecipes)
+  //   if (!selectedIngredients.length) return;
+  //   fetch(`http://localhost:5000/api/todos`, {
+  //     method: "POST",
+  //     body: JSON.stringify({ ingredients: selectedIngredients }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("data", data);
+  //       setFilteredRecipes(data.totalFilteredRecipes);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err", err);
+  //     });
+  // }, [selectedIngredients]);
 
   useEffect(() => {
-    if (filteredRecipes.length > 0) {
-        return fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
+    // if filteredRecipes changes
+
+    // and if there are any ticked checkboxes, paginate according to filtered recipes
+    // if (filteredRecipes.totalFilteredRecipes.length > 0) {
+    if (selectedIngredients.length > 0) {
+        console.log("in filtered pagination branch")
+        fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
+          method: "POST",
+          body: JSON.stringify({ ingredients: selectedIngredients }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
           .then((response) => response.json())
-          .then(({ totalPages, totalFilteredRecipesCount, recipes }) => {
-            // console.log(totalPages, totalFilteredRecipesCount, filteredRecipes);
+          // .then((response) => console.log("response:", response))
+          .then(({totalFilteredRecipesCount, totalPages, totalFilteredRecipes }) => {
+            console.log(totalPages, totalFilteredRecipesCount, filteredRecipes);
             setFilteredRecipes((state) => {
-              // console.log("state", state);
-              return [...state, ...filteredRecipes];
+              console.log("state1.totalFilteredRecipes", state.totalFilteredRecipes);
+              console.log("totalFilteredRecipes", totalFilteredRecipes)
+              console.log("returning", [...state, ...totalFilteredRecipes])
+              console.log("state", state)
+              return [...state, ...totalFilteredRecipes];
             });
-            setHasMore(recipes.length > 0);
+            // setHasMore(true);
+            setHasMore(totalFilteredRecipes.length > 0);
             setLoading(false);
         });
+    //else paginate normally (ALL recipes)
     } else {
       fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
         .then((response) => response.json())
+        // .then((response) => console.log("response:", response))
         .then(({ totalPages, totalRecipes, recipes }) => {
           // console.log(totalPages, totalRecipes, recipes);
           setRecipes((state) => {
-            // console.log("state", state);
+            console.log("state2", state);
+            console.log("recipes", recipes)
             return [...state, ...recipes];
           });
           setHasMore(recipes.length > 0);
           setLoading(false);
         });
     }
-  }, [pageNumber, filteredRecipes]);
+  }, [pageNumber, selectedIngredients]);
 
+  console.log("outside of all branches")
+  console.log("-------------")
+  console.log("recipes:", recipes)
+  console.log("recipes length:", recipes.length)
 
   console.log("filtered recipes:", filteredRecipes)
   console.log("filtered recipes length:", filteredRecipes.length)
