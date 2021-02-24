@@ -53,7 +53,7 @@ const RecipeList = ({ selectedIngredients }) => {
     <div className="all-recipes">
       <>
         {filteredRecipes.map((recipe) => {
-          const recipe_id = recipe._id
+          const recipeObject = recipe
           return (
             <div className="recipe-card" key={recipe._id}>
               <img className="recipe-image" src={recipe.image}></img>
@@ -63,7 +63,7 @@ const RecipeList = ({ selectedIngredients }) => {
                 Cook: {recipe.time.cook} Prep: {recipe.time.prep}
               </p>
               < FavoriteButton
-                post_id={recipe_id}
+                post={recipeObject}
                />
               <Popup
                 trigger={<button> Recipe Info</button>}
