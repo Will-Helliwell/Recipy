@@ -3,28 +3,52 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 
 class FavoriteButton extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            loading: true,
+            liked: false,
+          };
+    }
 
-    handleClick(user_id) {
-        console.log("inside handleClick");
-        console.log("User Name: " + user_id.name);
-        console.log("User Id: " + user_id.id);
-        console.log("Post: " + this.props.post)
-        const addToFav = { name: user_id.name, recipe: this.props.post }
-        console.log(addToFav)
-        axios
-          .post("http://localhost:5000/api/favorites/addfav", addToFav)
-          .then(
-            res => {
+    sendData(user_id){
+            if (this.state.liked) {
+                const removeFav = { name: user_id.name, recipe: this.props.post }
+                console.log(removeFav)
+                axios
+                    .post("http://localhost:5000/api/favorites/removefav", removeFav)
+                    .then(
+                        res => {
+                        console.log("deleting fav")
+                        console.log(res)
+                        }
+                );
+
+            } else {
+            const addToFav = { name: user_id.name, recipe: this.props.post }
+            console.log(addToFav)
+            axios
+              .post("http://localhost:5000/api/favorites/addfav", addToFav)
+              .then(
+                res => {
                 console.log("inside axios post request")
                 console.log(res)
-            }
-        );
+                }
+              );
+        }
+    }
+
+    handleClick(user_id) {
+        this.setState(prevState => (prevState, {
+            liked: !prevState.liked
+          }));
+          this.sendData(user_id);
     };
     render() {
         const { user } = this.props.auth;
   return (
       <button className="addtofavorite" onClick={this.handleClick.bind(this, user)}>
-          Add to Favorites
+          {this.state.liked ? "Remove from Favorites" : "Add to Favorites"}
       </button>
     )
   }   
