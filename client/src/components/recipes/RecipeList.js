@@ -34,6 +34,7 @@ const RecipeList = ({ selectedIngredients }) => {
 
     if (selectedIngredients.length > 0) {
         console.log("in filtered pagination branch")
+        setRecipes([])
         fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
           method: "POST",
           body: JSON.stringify({ ingredients: selectedIngredients }),
