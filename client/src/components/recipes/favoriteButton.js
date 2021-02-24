@@ -9,7 +9,7 @@ class FavoriteButton extends React.Component {
         console.log("User Name: " + user_id.name);
         console.log("User Id: " + user_id.id);
         console.log("Post: " + this.props.post)
-        const addToFav = JSON.stringify({ name: user_id.name, recipe: this.props.post})
+        const addToFav = { name: user_id.name, recipe: this.props.post }
         console.log(addToFav)
         axios
           .post("http://localhost:5000/api/favorites/addfav", addToFav)
