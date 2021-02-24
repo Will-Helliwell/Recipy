@@ -9,9 +9,12 @@ class FavoriteButton extends React.Component {
         console.log("User Name: " + user_id.name);
         console.log("User Id: " + user_id.id);
         console.log("Post: " + this.props.post)
-        axios.post("/favorites/addfav", this.props.post.name).then(
+        axios
+          .post("http://localhost:5000/api/favorites/addfav", this.props.post.name)
+          .then(
             res => {
                 console.log("inside axios post request")
+                console.log(res)
             }
         );
         // axios

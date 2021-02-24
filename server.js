@@ -6,6 +6,7 @@ const path = require("path");
 require("dotenv").config();
 const passport = require("passport");
 const users = require("./routes/users");
+const favorites = require("./routes/favorites")
 
 
 console.log("inside server.js script")
@@ -76,5 +77,6 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
+app.use("/api/favorites", favorites);
 
 // made some changes to routes
