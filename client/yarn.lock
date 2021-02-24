@@ -8748,10 +8748,22 @@
     "prop-types" "^15.6.2"
     "react-lifecycles-compat" "^3.0.4"
 
+<<<<<<< HEAD
+react-window-infinite-loader@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-window-infinite-loader/-/react-window-infinite-loader-1.0.7.tgz#958ef1a689d20dce122ef377583acd987760aee8"
+  integrity sha512-wg3LWkUpG21lhv+cZvNy+p0+vtclZw+9nP2vO6T9PKT50EN1cUq37Dq6FzcM38h/c2domE0gsUhb6jHXtGogAA==
+
+react@^17.0.1:
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-17.0.1.tgz#6e0600416bd57574e3f86d92edba3d9008726127"
+  integrity sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w==
+=======
 "react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.1", "react@>=15", "react@>=15.0.0", "react@>=16", "react@>=16.3.0", "react@0.14.x || ^15.0.0 || ^16.0.0", "react@17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.yarnpkg.com/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
+>>>>>>> origin/development_branch
   dependencies:
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
