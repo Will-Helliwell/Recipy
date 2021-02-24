@@ -5,6 +5,7 @@ import React, {
   useRef,
   useCallback,
 } from "react";
+import Popup from "reactjs-popup";
 
 const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
@@ -12,7 +13,6 @@ const RecipeList = ({ selectedIngredients }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
-
 
   const observer = useRef();
   const lastRecipeElementRef = useCallback(
@@ -31,31 +31,35 @@ const RecipeList = ({ selectedIngredients }) => {
   );
 
   useEffect(() => {
-
     if (selectedIngredients.length > 0) {
-        console.log("in filtered pagination branch")
-        setRecipes([])
-        fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
-          method: "POST",
-          body: JSON.stringify({ ingredients: selectedIngredients }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => response.json())
-          // .then((response) => console.log("response:", response))
-          .then(({totalFilteredRecipesCount, totalPages, totalFilteredRecipes }) => {
+      console.log("in filtered pagination branch");
+      setRecipes([]);
+      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
+        method: "POST",
+        body: JSON.stringify({ ingredients: selectedIngredients }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        // .then((response) => console.log("response:", response))
+        .then(
+          ({ totalFilteredRecipesCount, totalPages, totalFilteredRecipes }) => {
             console.log(totalPages, totalFilteredRecipesCount, filteredRecipes);
             setFilteredRecipes((state) => {
-              console.log("state1.totalFilteredRecipes", state.totalFilteredRecipes);
-              console.log("totalFilteredRecipes", totalFilteredRecipes)
-              console.log("returning", [...state, ...totalFilteredRecipes])
-              console.log("state", state)
+              console.log(
+                "state1.totalFilteredRecipes",
+                state.totalFilteredRecipes
+              );
+              console.log("totalFilteredRecipes", totalFilteredRecipes);
+              console.log("returning", [...state, ...totalFilteredRecipes]);
+              console.log("state", state);
               return [...state, ...totalFilteredRecipes];
             });
             setHasMore(totalFilteredRecipes.length > 0);
             setLoading(false);
-        });
+          }
+        );
     } else {
       fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
         .then((response) => response.json())
@@ -64,7 +68,7 @@ const RecipeList = ({ selectedIngredients }) => {
           // console.log(totalPages, totalRecipes, recipes);
           setRecipes((state) => {
             console.log("state2", state);
-            console.log("recipes", recipes)
+            console.log("recipes", recipes);
             return [...state, ...recipes];
           });
           setHasMore(recipes.length > 0);
@@ -73,16 +77,16 @@ const RecipeList = ({ selectedIngredients }) => {
     }
   }, [pageNumber, selectedIngredients]);
 
-  console.log("outside of all branches")
-  console.log("-------------")
-  console.log("recipes:", recipes)
-  console.log("recipes length:", recipes.length)
+  console.log("outside of all branches");
+  console.log("-------------");
+  console.log("recipes:", recipes);
+  console.log("recipes length:", recipes.length);
 
-  console.log("filtered recipes:", filteredRecipes)
-  console.log("filtered recipes length:", filteredRecipes.length)
+  console.log("filtered recipes:", filteredRecipes);
+  console.log("filtered recipes length:", filteredRecipes.length);
 
   return (
-    <>
+    <div className="all-recipes">
       <>
         {recipes.map((recipe, index) => {
           if (recipes.length === index + 1) {

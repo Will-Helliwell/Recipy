@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const routes = require("./routes/api");
 const path = require("path");
 require("dotenv").config();
+const passport = require("passport");
+const users = require("./routes/users");
 
 const cors = require("cors");
 
@@ -15,23 +17,27 @@ app.use(cors());
 
 const port = process.env.PORT || 5000;
 
+const testDB = require("./config/keys").mongoTEST;
+const devDB = require("./config/keys").mongoDEV;
+const prodDB = require("./config/keys").mongoPROD;
+
 //connect to the database
 if (process.env.NODE_ENV == "test") {
   console.log("TEST DB IS WORKING", process.env.NODE_ENV);
   mongoose
-    .connect(process.env.RECIPY_TEST, { useNewUrlParser: true })
+    .connect(testDB, { useNewUrlParser: true })
     .then(() => console.log(`Test Database connected successfully`))
     .catch((err) => console.log(err));
 } else if (process.env.NODE_ENV == "development") {
   console.log("DEV IS WORKING", process.env.NODE_ENV);
   mongoose
-    .connect(process.env.RECIPY_DEV, { useNewUrlParser: true })
+    .connect(devDB, { useNewUrlParser: true })
     .then(() => console.log(`Dev Database connected successfully`))
     .catch((err) => console.log(err));
 } else {
   console.log("PROD IS WORKING", process.env.NODE_ENV);
   mongoose
-    .connect(process.env.RECIPY_PROD, { useNewUrlParser: true })
+    .connect(prodDB, { useNewUrlParser: true })
     .then(() => console.log(`Prod Database connected successfully`))
     .catch((err) => console.log(err));
 }
@@ -47,6 +53,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
 app.use(bodyParser.json());
 
 app.use("/api", routes);
@@ -59,3 +70,12 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+// Routes
+app.use("/api/users", users);
+
+// made some changes to routes

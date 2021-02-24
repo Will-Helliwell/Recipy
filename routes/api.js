@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const Todo = require("../models/recipy");
+const Recipy = require("../models/recipy");
 
 router.get("/todos", async (req, res, next) => {
   const PAGE_SIZE = 3;
   const page = parseInt(req.query.page || "0");
-  const totalRecipes = await Todo.countDocuments({});
-  const recipes = await Todo.find({})
+  const totalRecipes = await Recipy.countDocuments({});
+  const recipes = await Recipy.find({})
     .limit(PAGE_SIZE)
     .skip(PAGE_SIZE * page);
   res.json({
@@ -19,7 +19,7 @@ router.get("/todos", async (req, res, next) => {
 router.post("/todos", async (req, res, next) => {
   if (req.body.action) {
     console.log("in add recipe route");
-    Todo.create(req.body)
+    Recipy.create(req.body)
       .then((data) => res.json(data))
       .catch(next);
   } else if (req.body.ingredients) {
@@ -33,14 +33,14 @@ router.post("/todos", async (req, res, next) => {
     );
     const PAGE_SIZE = 3;
     const page = parseInt(req.query.page || "0");
-    const totalFilteredRecipesCount = await Todo.find({
+    const totalFilteredRecipesCount = await Recipy.find({
       $and: db_query_array,
     }).countDocuments();
-    const totalFilteredRecipes = await Todo.find({ $and: db_query_array })
+    const totalFilteredRecipes = await Recipy.find({ $and: db_query_array })
       .limit(PAGE_SIZE)
       .skip(PAGE_SIZE * page);
     console.log(db_query_array);
-    Todo.find({ $and: db_query_array }).then((data) =>
+    Recipy.find({ $and: db_query_array }).then((data) =>
       res.json({
         totalFilteredRecipesCount,
         totalPages: Math.ceil(totalFilteredRecipesCount / PAGE_SIZE),
@@ -56,9 +56,11 @@ router.post("/todos", async (req, res, next) => {
 });
 
 router.delete("/todos/:id", (req, res, next) => {
-  Todo.findOneAndDelete({ _id: req.params.id })
+  Recipy.findOneAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch(next);
 });
 
 module.exports = router;
+
+// made some changes to routes

@@ -1,4 +1,4 @@
-require('../../index')
+require('../../server')
 
 console.log("inside playerSpec")
 console.log(process.env.NODE_ENV)
