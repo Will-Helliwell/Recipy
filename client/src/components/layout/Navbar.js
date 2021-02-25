@@ -16,7 +16,9 @@ class Navbar extends Component {
               {/* <i className="material-icons">code</i> */}
               Recipy
             </Link>
+            
           </div>
+          Using recipes from BBC Goodfood
         </nav>
       </div>
     );

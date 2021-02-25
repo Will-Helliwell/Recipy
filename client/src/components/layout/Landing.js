@@ -8,7 +8,7 @@ class Landing extends Component {
           <div className="col s12 center-align">
             <h4>
               <b></b>{" "}
-              <span style={{ fontFamily: "monospace" }}>Pick your favourite recipes and have them delivered straight to your door!</span> 
+              <span style={{ fontFamily: "monospace" }}>Pick your favourite recipes from BBC Good Food!</span> 
             </h4>
             <p className="flow-text grey-text text-darken-1">
             Why not enjoy a playlist while you cook too...
