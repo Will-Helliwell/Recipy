@@ -94,7 +94,7 @@ import React, {
           if (recipes.length === index + 1) {
               return (
                 <div className="recipe-card" ref={lastRecipeElementRef}>
-                   <img className="recipe-image" src={recipe.image}></img>
+                   <img className="recipe-image" alt={recipe.image} src={recipe.image}></img>
                     <p className="recipe-name"> {recipe.name}</p>
                     <p className="recipe-summary"> {recipe.summary}</p>
                     <p className="time-text">
@@ -108,7 +108,7 @@ import React, {
                         position="top center"
                         >
                         <div className="popup-container">
-                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
                         <p className="popup recipe-name"> {recipe.name}</p>
                         <p className="popup recipe-summary"> {recipe.summary}</p>
                         <p className="popup time-text">
@@ -139,7 +139,7 @@ import React, {
               )} else {
             return (
               <div className="recipe-card" ref={lastRecipeElementRef}>
-                    <img className="recipe-image" src={recipe.image}></img>
+                    <img className="recipe-image" alt={recipe.image} src={recipe.image}></img>
                     <p className="recipe-name"> {recipe.name}</p>
                     <p className="recipe-summary"> {recipe.summary}</p>
                     <p className="time-text">
@@ -153,7 +153,7 @@ import React, {
                         position="top center"
                         >
                         <div className="popup-container">
-                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
                         <p className="popup recipe-name"> {recipe.name}</p>
                         <p className="popup recipe-summary"> {recipe.summary}</p>
                         <p className="popup time-text">
@@ -192,7 +192,7 @@ import React, {
           if (filteredRecipes.length === index + 1) {
             return (
               <div className="recipe-card" ref={lastRecipeElementRef}>
-                    <img className="recipe-image" src={recipe.image}></img>
+                    <img className="recipe-image" alt={recipe.image} src={recipe.image}></img>
                     <p className="recipe-name"> {recipe.name}</p>
                     <p className="recipe-summary"> {recipe.summary}</p>
                     <p className="time-text">
@@ -206,7 +206,7 @@ import React, {
                         position="top center"
                         >
                         <div className="popup-container">
-                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
                         <p className="popup recipe-name"> {recipe.name}</p>
                         <p className="popup recipe-summary"> {recipe.summary}</p>
                         <p className="popup time-text">
@@ -238,7 +238,7 @@ import React, {
           } else {
             return (
               <div className="recipe-card" ref={lastRecipeElementRef}>
-                    <img className="recipe-image" src={recipe.image}></img>
+                    <img className="recipe-image" alt={recipe.image} src={recipe.image}></img>
                     <p className="recipe-name"> {recipe.name}</p>
                     <p className="recipe-summary"> {recipe.summary}</p>
                     <p className="time-text">
@@ -252,7 +252,7 @@ import React, {
                         position="top center"
                         >
                         <div className="popup-container">
-                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
                         <p className="popup recipe-name"> {recipe.name}</p>
                         <p className="popup recipe-summary"> {recipe.summary}</p>
                         <p className="popup time-text">

@@ -18,16 +18,22 @@ const Categories = ({ type, ingredients, setIngredients }) => {
           <>
           
             <p>{ing}</p>
+            <label>
             <input
               type="checkbox"
+              
               value={ing}
               onChange={(event) => {
                 setIngredients({
                   ...ingredients,
                   [type]: { ...ingredients[type], [ing]: event.target.checked },
                 });
+                
               }}
+              
             />
+            <span></span>
+            </label>
            
           </>
       
