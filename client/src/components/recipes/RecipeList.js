@@ -32,13 +32,11 @@ import React, {
   );
 
 
-// comment
-
   useEffect(() => {
     if (selectedIngredients.length > 0) {
       console.log("in filtered pagination branch");
       setRecipes([]);
-      setFilteredRecipes([])
+      // setFilteredRecipes([])
       fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
         method: "POST",
         body: JSON.stringify({ ingredients: selectedIngredients }),
@@ -80,7 +78,56 @@ import React, {
           setLoading(false);
         });
     }
-  }, [pageNumber, selectedIngredients]);
+  }, [pageNumber]);
+
+  useEffect(() => {
+    if (selectedIngredients.length > 0) {
+      console.log("in filtered pagination branch");
+      setRecipes([]);
+      setFilteredRecipes([])
+      setPageNumber(0)
+      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
+        method: "POST",
+        body: JSON.stringify({ ingredients: selectedIngredients }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        // .then((response) => console.log("response:", response))
+        .then(
+          ({ totalFilteredRecipesCount, totalPages, totalFilteredRecipes }) => {
+            console.log(totalPages, totalFilteredRecipesCount, filteredRecipes);
+            setFilteredRecipes((state) => {
+              console.log(
+                "state1.totalFilteredRecipes",
+                state.totalFilteredRecipes
+              );
+              console.log("totalFilteredRecipes", totalFilteredRecipes);
+              console.log("returning", [...state, ...totalFilteredRecipes]);
+              console.log("state", state);
+              return [...state, ...totalFilteredRecipes];
+            });
+            setHasMore(totalFilteredRecipes.length > 0);
+            setLoading(false);
+          }
+        );
+    } else {
+      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
+        .then((response) => response.json())
+        // .then((response) => console.log("response:", response))
+        .then(({ totalPages, totalRecipes, recipes }) => {
+          // console.log(totalPages, totalRecipes, recipes);
+          setRecipes((state) => {
+            console.log("state2", state);
+            console.log("recipes", recipes);
+            return [...state, ...recipes];
+          });
+          setHasMore(recipes.length > 0);
+          setLoading(false);
+        });
+    }
+  }, [selectedIngredients]);
 
   console.log("outside of all branches");
   console.log("-------------");
