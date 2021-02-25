@@ -1,22 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import hardcodedOptions from "./hardCodedOptions";
+import {Collapse} from 'react-collapse';
 
 const Categories = ({ type, ingredients, setIngredients }) => {
+
+  const [opened, setOpened] = useState({opened: false})
   const options = hardcodedOptions;
 
-  // const hardcodedOptions = {
-  //   Dairy: ['Milk', 'Cream', 'Cheese']
-  // };
+  const handleClick = () => {
+    console.log("in handleClick")
+    console.log(opened)
+    setOpened(!opened)
+    };
+  
 
   return (
     <div>
-          <h1 className="categ" className="flow-text grey-text text-darken-1">{type}</h1>
-      <div className="content">
-
+          <h1 className="categ flow-text grey-text text-darken-1" onClick={handleClick.bind()}>{type}</h1>
+      <div className="content">    
       {options[type].map((ing) => {
         return (
           <>
-          
+          <Collapse isOpened={opened ? false : true}>
             <p >{ing}</p>
             <label>
             <input
@@ -32,7 +37,7 @@ const Categories = ({ type, ingredients, setIngredients }) => {
             />
             <span></span>
             </label>
-           
+            </Collapse>
           </>
       
          
