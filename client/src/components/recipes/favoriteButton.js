@@ -9,7 +9,26 @@ class FavoriteButton extends React.Component {
             loading: true,
             liked: false,
           };
+          this.fetchLikeData(user)
     }
+
+    fetchLikeData() {
+
+        const data = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+        const favData = { name: user_id.name, recipe: this.props.post }
+        axios
+            .post("http://localhost:5000/api/favorites/favdata", favData)
+            .then(
+                        res => {
+                        console.log("deleting fav")
+                        console.log(res)
+                        }
+                );
+        
+        .then(data => {
+          this.setState(data)
+        })
+      }
 
     sendData(user_id){
             if (this.state.liked) {

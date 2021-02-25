@@ -10,18 +10,17 @@ const Categories = ({ type, ingredients, setIngredients }) => {
 
   return (
     <div>
-          <h1 className="categ">{type}</h1>
+          <h1 className="categ" className="flow-text grey-text text-darken-1">{type}</h1>
       <div className="content">
 
       {options[type].map((ing) => {
         return (
           <>
           
-            <p>{ing}</p>
+            <p >{ing}</p>
             <label>
             <input
               type="checkbox"
-              
               value={ing}
               onChange={(event) => {
                 setIngredients({
@@ -30,7 +29,6 @@ const Categories = ({ type, ingredients, setIngredients }) => {
                 });
                 
               }}
-              
             />
             <span></span>
             </label>

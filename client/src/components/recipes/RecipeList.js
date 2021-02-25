@@ -105,7 +105,7 @@ import React, {
                     />
                       <Popup
                         trigger={<button> Recipe Info</button>}
-                        position="top center"
+                        position="center center"
                         >
                         <div className="popup-container">
                         <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
@@ -150,7 +150,7 @@ import React, {
                     />
                       <Popup
                         trigger={<button> Recipe Info</button>}
-                        position="top center"
+                        position="center center"
                         >
                         <div className="popup-container">
                         <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
@@ -203,7 +203,7 @@ import React, {
                     />
                       <Popup
                         trigger={<button> Recipe Info</button>}
-                        position="top center"
+                        position="center center"
                         >
                         <div className="popup-container">
                         <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
@@ -249,7 +249,7 @@ import React, {
                     />
                       <Popup
                         trigger={<button> Recipe Info</button>}
-                        position="top center"
+                        position="center center"
                         >
                         <div className="popup-container">
                         <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
