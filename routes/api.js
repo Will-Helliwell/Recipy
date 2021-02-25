@@ -3,7 +3,7 @@ const router = express.Router();
 const Recipy = require("../models/recipy");
 
 router.get("/todos", async (req, res, next) => {
-  const PAGE_SIZE = 3;
+  const PAGE_SIZE = 30;
   const page = parseInt(req.query.page || "0");
   const totalRecipes = await Recipy.countDocuments({});
   const recipes = await Recipy.find({})
@@ -31,7 +31,7 @@ router.post("/todos", async (req, res, next) => {
     regex_array.forEach((ingredient) =>
       db_query_array.push({ ingredients: { $regex: ingredient } })
     );
-    const PAGE_SIZE = 3;
+    const PAGE_SIZE = 30;
     const page = parseInt(req.query.page || "0");
     const totalFilteredRecipesCount = await Recipy.find({
       $and: db_query_array,

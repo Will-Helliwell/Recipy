@@ -181,8 +181,8 @@ import React, {
               </Popup>
               </div>
               )} else {
-            return (
-              <div className="recipe-card" ref={lastRecipeElementRef}>
+                return (
+                  <div className="recipe-card">
                     <img className="recipe-image" alt={recipe.image} src={recipe.image}></img>
                     <p className="recipe-name"> {recipe.name}</p>
                     <p className="recipe-summary"> {recipe.summary}</p>
@@ -221,7 +221,7 @@ import React, {
                       <h2>Time</h2>
                       <p>Cook: {recipe.time.cook}</p>
                       <p>Prep: {recipe.time.prep}</p>
-                      );
+                      
                       </div>
               </Popup>
               </div>
@@ -230,6 +230,7 @@ import React, {
         })}
         <div>{loading && "Loading..."}</div>
       </>
+      
       <div>
         {filteredRecipes.map((recipe, index) => {
           const recipeObject = recipe
@@ -274,7 +275,7 @@ import React, {
                       <h2>Time</h2>
                       <p>Cook: {recipe.time.cook}</p>
                       <p>Prep: {recipe.time.prep}</p>
-                      );
+                      
                       </div>
               </Popup>
               </div>
@@ -320,7 +321,7 @@ import React, {
                       <h2>Time</h2>
                       <p>Cook: {recipe.time.cook}</p>
                       <p>Prep: {recipe.time.prep}</p>
-                      );
+                      
                       </div>
               </Popup>
               </div>
