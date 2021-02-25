@@ -90,57 +90,88 @@ const RecipeList = ({ selectedIngredients }) => {
       <>
         {recipes.map((recipe, index) => {
           if (recipes.length === index + 1) {
-            return (
-              <div ref={lastRecipeElementRef}>
-                <img src={recipe.image}></img>
-                <h2>NAME</h2>
-                <p> {recipe.name}</p>
-                <h2>INGREDIENTS</h2>
-                {recipe.ingredients.map((ing) => {
-                  return (
-                    <>
-                      <li>{ing}</li>
-                    </>
-                  );
-                })}
-                <h2>INSTRUCTIONS</h2>
-                {recipe.instructions.map((steps) => {
-                  return (
-                    <ul>
-                      <li>{steps}</li>
-                    </ul>
-                  );
-                })}
-                <h2>Time</h2>
-                <p>Cook: {recipe.time.cook}</p>
-                <p>Prep: {recipe.time.prep}</p>
+              return (
+                <div className="recipe-card" ref={lastRecipeElementRef}>
+                   <img className="recipe-image" src={recipe.image}></img>
+                    <p className="recipe-name"> {recipe.name}</p>
+                    <p className="recipe-summary"> {recipe.summary}</p>
+                    <p className="time-text">
+                      Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                    </p>
+                      <Popup
+                        trigger={<button> Recipe Info</button>}
+                        position="top center"
+                        >
+                        <div className="popup-container">
+                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <p className="popup recipe-name"> {recipe.name}</p>
+                        <p className="popup recipe-summary"> {recipe.summary}</p>
+                        <p className="popup time-text">
+                          Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                        </p>
+                              {recipe.ingredients.map((ing) => {
+                                return (
+                                  <>
+                                    <li>{ing}</li>
+                                  </>
+                                );
+                              })}
+                      <h2>INSTRUCTIONS</h2>
+                              {recipe.instructions.map((steps) => {
+                                return (
+                                  <ul>
+                                    <li>{steps}</li>
+                                  </ul>
+                                );
+                              })}
+                      <h2>Time</h2>
+                      <p>Cook: {recipe.time.cook}</p>
+                      <p>Prep: {recipe.time.prep}</p>
+                      );
+                      </div>
+              </Popup>
               </div>
-            );
-          } else {
+              )} else {
             return (
-              <div>
-                <img src={recipe.image}></img>
-                <h2>NAME</h2>
-                <p> {recipe.name}</p>
-                <h2>INGREDIENTS</h2>
-                {recipe.ingredients.map((ing) => {
-                  return (
-                    <>
-                      <li>{ing}</li>
-                    </>
-                  );
-                })}
-                <h2>INSTRUCTIONS</h2>
-                {recipe.instructions.map((steps) => {
-                  return (
-                    <ul>
-                      <li>{steps}</li>
-                    </ul>
-                  );
-                })}
-                <h2>Time</h2>
-                <p>Cook: {recipe.time.cook}</p>
-                <p>Prep: {recipe.time.prep}</p>
+              <div className="recipe-card" ref={lastRecipeElementRef}>
+                    <img className="recipe-image" src={recipe.image}></img>
+                    <p className="recipe-name"> {recipe.name}</p>
+                    <p className="recipe-summary"> {recipe.summary}</p>
+                    <p className="time-text">
+                      Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                    </p>
+                      <Popup
+                        trigger={<button> Recipe Info</button>}
+                        position="top center"
+                        >
+                        <div className="popup-container">
+                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <p className="popup recipe-name"> {recipe.name}</p>
+                        <p className="popup recipe-summary"> {recipe.summary}</p>
+                        <p className="popup time-text">
+                          Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                        </p>
+                              {recipe.ingredients.map((ing) => {
+                                return (
+                                  <>
+                                    <li>{ing}</li>
+                                  </>
+                                );
+                              })}
+                      <h2>INSTRUCTIONS</h2>
+                              {recipe.instructions.map((steps) => {
+                                return (
+                                  <ul>
+                                    <li>{steps}</li>
+                                  </ul>
+                                );
+                              })}
+                      <h2>Time</h2>
+                      <p>Cook: {recipe.time.cook}</p>
+                      <p>Prep: {recipe.time.prep}</p>
+                      );
+                      </div>
+              </Popup>
               </div>
             );
           }
@@ -151,62 +182,95 @@ const RecipeList = ({ selectedIngredients }) => {
         {filteredRecipes.map((recipe, index) => {
           if (filteredRecipes.length === index + 1) {
             return (
-              <div ref={lastRecipeElementRef}>
-                <img src={recipe.image}></img>
-                <h2>NAME</h2>
-                <p> {recipe.name}</p>
-                <h2>INGREDIENTS</h2>
-                {recipe.ingredients.map((ing) => {
-                  return (
-                    <>
-                      <li>{ing}</li>
-                    </>
-                  );
-                })}
-                <h2>INSTRUCTIONS</h2>
-                {recipe.instructions.map((steps) => {
-                  return (
-                    <ul>
-                      <li>{steps}</li>
-                    </ul>
-                  );
-                })}
-                <h2>Time</h2>
-                <p>Cook: {recipe.time.cook}</p>
-                <p>Prep: {recipe.time.prep}</p>
+              <div className="recipe-card" ref={lastRecipeElementRef}>
+                    <img className="recipe-image" src={recipe.image}></img>
+                    <p className="recipe-name"> {recipe.name}</p>
+                    <p className="recipe-summary"> {recipe.summary}</p>
+                    <p className="time-text">
+                      Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                    </p>
+                      <Popup
+                        trigger={<button> Recipe Info</button>}
+                        position="top center"
+                        >
+                        <div className="popup-container">
+                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <p className="popup recipe-name"> {recipe.name}</p>
+                        <p className="popup recipe-summary"> {recipe.summary}</p>
+                        <p className="popup time-text">
+                          Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                        </p>
+                              {recipe.ingredients.map((ing) => {
+                                return (
+                                  <>
+                                    <li>{ing}</li>
+                                  </>
+                                );
+                              })}
+                      <h2>INSTRUCTIONS</h2>
+                              {recipe.instructions.map((steps) => {
+                                return (
+                                  <ul>
+                                    <li>{steps}</li>
+                                  </ul>
+                                );
+                              })}
+                      <h2>Time</h2>
+                      <p>Cook: {recipe.time.cook}</p>
+                      <p>Prep: {recipe.time.prep}</p>
+                      );
+                      </div>
+              </Popup>
               </div>
             );
           } else {
             return (
-              <div>
-                <img src={recipe.image}></img>
-                <h2>NAME</h2>
-                <p> {recipe.name}</p>
-                <h2>INGREDIENTS</h2>
-                {recipe.ingredients.map((ing) => {
-                  return (
-                    <>
-                      <li>{ing}</li>
-                    </>
-                  );
-                })}
-                <h2>INSTRUCTIONS</h2>
-                {recipe.instructions.map((steps) => {
-                  return (
-                    <ul>
-                      <li>{steps}</li>
-                    </ul>
-                  );
-                })}
-                <h2>Time</h2>
-                <p>Cook: {recipe.time.cook}</p>
-                <p>Prep: {recipe.time.prep}</p>
+              <div className="recipe-card" ref={lastRecipeElementRef}>
+                    <img className="recipe-image" src={recipe.image}></img>
+                    <p className="recipe-name"> {recipe.name}</p>
+                    <p className="recipe-summary"> {recipe.summary}</p>
+                    <p className="time-text">
+                      Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                    </p>
+                      <Popup
+                        trigger={<button> Recipe Info</button>}
+                        position="top center"
+                        >
+                        <div className="popup-container">
+                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <p className="popup recipe-name"> {recipe.name}</p>
+                        <p className="popup recipe-summary"> {recipe.summary}</p>
+                        <p className="popup time-text">
+                          Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                        </p>
+                              {recipe.ingredients.map((ing) => {
+                                return (
+                                  <>
+                                    <li>{ing}</li>
+                                  </>
+                                );
+                              })}
+                      <h2>INSTRUCTIONS</h2>
+                              {recipe.instructions.map((steps) => {
+                                return (
+                                  <ul>
+                                    <li>{steps}</li>
+                                  </ul>
+                                );
+                              })}
+                      <h2>Time</h2>
+                      <p>Cook: {recipe.time.cook}</p>
+                      <p>Prep: {recipe.time.prep}</p>
+                      );
+                      </div>
+              </Popup>
               </div>
             );
           }
         })}
       </div>
-    </>
+      
+    </div>
   );
 };
 
