@@ -1,5 +1,5 @@
 const hardcodedOptions = {
-  Dairy: ["Milk", "Cream", "Cheese", "Butter", "Condensed Milk"],
+  Dairy: ["Milk", "Cream", "Cheese"],
   Fish: ["Salmon", "Tuna", "Sea Bass"],
   Meats: ["Lamb", "Chicken", "Beef"],
   Vegetables: ["Potato", "Onion", "Carrot"],

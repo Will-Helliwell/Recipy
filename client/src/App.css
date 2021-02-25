@@ -82,17 +82,16 @@
 }
 
 .all-recipes {
-  position: relative;
+  /* position: relative; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  /* padding-left: 30%; */
 }
 
 .popup-container {
   height: 80%;
   width: 50%;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(205, 226, 200);
   position: center;
   box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.411);
 }
@@ -105,10 +104,14 @@
 }
 
 .sidebar {
+  position: sticky;
+  top: 0;
   display: flex;
-  justify-content: space-around ;
- padding-left: 50px;
- padding-right: 50px;
+  flex-direction: column;
+  z-index: 1;
+  height: auto;
+  width: auto;
+  border-right: #2e342841;
 }
 
 .ign-name {
@@ -139,14 +142,6 @@
   flex-wrap: space-between;
 }
 
-
-
-
-
-
-
-
-
 .recipe-name {
   font-weight: bold;
   font-size: 1em;
@@ -176,6 +171,11 @@
   box-sizing: border-box;
 }
 
+.ing-rec {
+  display: grid;
+  grid-template-columns: 1.5fr 11.5fr;
+}
+
 .recipe-image {
   height: 200px;
   width: 200px;
@@ -187,7 +187,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding-left: 30%;
+  border-left: #2e342841;
 }
 
 .popup-container {

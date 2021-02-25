@@ -107,11 +107,14 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
           </Switch>
-          <IngredientList
-            ingredients={ingredients}
-            setIngredients={setIngredients}
-          />
+          <div className="ing-rec">
+            <IngredientList
+              ingredients={ingredients}
+              setIngredients={setIngredients}
+            />
+          
           <RecipeList selectedIngredients={selectedIngredients} />
+          </div>
         </div>
       </Router>
     </Provider>

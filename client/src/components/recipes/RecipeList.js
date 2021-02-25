@@ -78,7 +78,8 @@ import React, {
           setLoading(false);
         });
     }
-  }, [pageNumber]);
+
+  }, [pageNumber, selectedIngredients]);
 
   useEffect(() => {
     if (selectedIngredients.length > 0) {
@@ -129,14 +130,6 @@ import React, {
     }
   }, [selectedIngredients]);
 
-  console.log("outside of all branches");
-  console.log("-------------");
-  console.log("recipes:", recipes);
-  console.log("recipes length:", recipes.length);
-
-  console.log("filtered recipes:", filteredRecipes);
-  console.log("filtered recipes length:", filteredRecipes.length);
-
   return (
     <div className="all-recipes">
       <>
@@ -145,7 +138,7 @@ import React, {
           if (recipes.length === index + 1) {
               return (
                 <div className="recipe-card" ref={lastRecipeElementRef}>
-                   <img className="recipe-image" src={recipe.image}></img>
+                   <img className="recipe-image" alt={recipe.image} src={recipe.image}></img>
                     <p className="recipe-name"> {recipe.name}</p>
                     <p className="recipe-summary"> {recipe.summary}</p>
                     <p className="time-text">
@@ -156,10 +149,10 @@ import React, {
                     />
                       <Popup
                         trigger={<button> Recipe Info</button>}
-                        position="top center"
+                        position="center center"
                         >
                         <div className="popup-container">
-                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
                         <p className="popup recipe-name"> {recipe.name}</p>
                         <p className="popup recipe-summary"> {recipe.summary}</p>
                         <p className="popup time-text">
@@ -190,7 +183,7 @@ import React, {
               )} else {
             return (
               <div className="recipe-card" ref={lastRecipeElementRef}>
-                    <img className="recipe-image" src={recipe.image}></img>
+                    <img className="recipe-image" alt={recipe.image} src={recipe.image}></img>
                     <p className="recipe-name"> {recipe.name}</p>
                     <p className="recipe-summary"> {recipe.summary}</p>
                     <p className="time-text">
@@ -201,10 +194,10 @@ import React, {
                     />
                       <Popup
                         trigger={<button> Recipe Info</button>}
-                        position="top center"
+                        position="center center"
                         >
                         <div className="popup-container">
-                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
                         <p className="popup recipe-name"> {recipe.name}</p>
                         <p className="popup recipe-summary"> {recipe.summary}</p>
                         <p className="popup time-text">
@@ -243,7 +236,7 @@ import React, {
           if (filteredRecipes.length === index + 1) {
             return (
               <div className="recipe-card" ref={lastRecipeElementRef}>
-                    <img className="recipe-image" src={recipe.image}></img>
+                    <img className="recipe-image" alt={recipe.image} src={recipe.image}></img>
                     <p className="recipe-name"> {recipe.name}</p>
                     <p className="recipe-summary"> {recipe.summary}</p>
                     <p className="time-text">
@@ -254,10 +247,10 @@ import React, {
                     />
                       <Popup
                         trigger={<button> Recipe Info</button>}
-                        position="top center"
+                        position="center center"
                         >
                         <div className="popup-container">
-                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
                         <p className="popup recipe-name"> {recipe.name}</p>
                         <p className="popup recipe-summary"> {recipe.summary}</p>
                         <p className="popup time-text">
@@ -289,7 +282,7 @@ import React, {
           } else {
             return (
               <div className="recipe-card" ref={lastRecipeElementRef}>
-                    <img className="recipe-image" src={recipe.image}></img>
+                    <img className="recipe-image" alt={recipe.image} src={recipe.image}></img>
                     <p className="recipe-name"> {recipe.name}</p>
                     <p className="recipe-summary"> {recipe.summary}</p>
                     <p className="time-text">
@@ -300,10 +293,10 @@ import React, {
                     />
                       <Popup
                         trigger={<button> Recipe Info</button>}
-                        position="top center"
+                        position="center center"
                         >
                         <div className="popup-container">
-                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <img className="popup recipe-image" alt={recipe.image} src={recipe.image}></img>
                         <p className="popup recipe-name"> {recipe.name}</p>
                         <p className="popup recipe-summary"> {recipe.summary}</p>
                         <p className="popup time-text">
