@@ -221,7 +221,7 @@ import React, {
                       <h2>Time</h2>
                       <p>Cook: {recipe.time.cook}</p>
                       <p>Prep: {recipe.time.prep}</p>
-                      
+
                       </div>
               </Popup>
               </div>
@@ -230,8 +230,8 @@ import React, {
         })}
         <div>{loading && "Loading..."}</div>
       </>
-      
-      <div>
+
+      <div className="all-recipes">
         {filteredRecipes.map((recipe, index) => {
           const recipeObject = recipe
           if (filteredRecipes.length === index + 1) {
@@ -275,7 +275,7 @@ import React, {
                       <h2>Time</h2>
                       <p>Cook: {recipe.time.cook}</p>
                       <p>Prep: {recipe.time.prep}</p>
-                      
+
                       </div>
               </Popup>
               </div>
@@ -321,7 +321,7 @@ import React, {
                       <h2>Time</h2>
                       <p>Cook: {recipe.time.cook}</p>
                       <p>Prep: {recipe.time.prep}</p>
-                      
+
                       </div>
               </Popup>
               </div>
