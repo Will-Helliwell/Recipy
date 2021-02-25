@@ -7,14 +7,14 @@ import React, {
  } from "react";
  import Popup from "reactjs-popup";
  import FavoriteButton from "./favoriteButton"
-  
+
  const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
-  
+
   const observer = useRef();
   const lastRecipeElementRef = useCallback(
     (node) => {
@@ -30,11 +30,13 @@ import React, {
     },
     [loading, hasMore]
   );
-  
+
+
   useEffect(() => {
     if (selectedIngredients.length > 0) {
       console.log("in filtered pagination branch");
       setRecipes([]);
+      // setFilteredRecipes([])
       fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
         method: "POST",
         body: JSON.stringify({ ingredients: selectedIngredients }),
@@ -76,8 +78,58 @@ import React, {
           setLoading(false);
         });
     }
+
   }, [pageNumber, selectedIngredients]);
-  
+
+  useEffect(() => {
+    if (selectedIngredients.length > 0) {
+      console.log("in filtered pagination branch");
+      setRecipes([]);
+      setFilteredRecipes([])
+      setPageNumber(0)
+      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
+        method: "POST",
+        body: JSON.stringify({ ingredients: selectedIngredients }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        // .then((response) => console.log("response:", response))
+        .then(
+          ({ totalFilteredRecipesCount, totalPages, totalFilteredRecipes }) => {
+            console.log(totalPages, totalFilteredRecipesCount, filteredRecipes);
+            setFilteredRecipes((state) => {
+              console.log(
+                "state1.totalFilteredRecipes",
+                state.totalFilteredRecipes
+              );
+              console.log("totalFilteredRecipes", totalFilteredRecipes);
+              console.log("returning", [...state, ...totalFilteredRecipes]);
+              console.log("state", state);
+              return [...state, ...totalFilteredRecipes];
+            });
+            setHasMore(totalFilteredRecipes.length > 0);
+            setLoading(false);
+          }
+        );
+    } else {
+      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
+        .then((response) => response.json())
+        // .then((response) => console.log("response:", response))
+        .then(({ totalPages, totalRecipes, recipes }) => {
+          // console.log(totalPages, totalRecipes, recipes);
+          setRecipes((state) => {
+            console.log("state2", state);
+            console.log("recipes", recipes);
+            return [...state, ...recipes];
+          });
+          setHasMore(recipes.length > 0);
+          setLoading(false);
+        });
+    }
+  }, [selectedIngredients]);
+
   return (
     <div className="all-recipes">
       <>
@@ -276,10 +328,9 @@ import React, {
           }
         })}
       </div>
-     
+
     </div>
   );
  };
-  
+
  export default RecipeList;
- 
