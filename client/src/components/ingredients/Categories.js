@@ -10,10 +10,13 @@ const Categories = ({ type, ingredients, setIngredients }) => {
 
   return (
     <div>
-      <h1>{type}</h1>
+          <h1 className="categ">{type}</h1>
+      <div className="content">
+
       {options[type].map((ing) => {
         return (
           <>
+          
             <p>{ing}</p>
             <input
               type="checkbox"
@@ -25,9 +28,13 @@ const Categories = ({ type, ingredients, setIngredients }) => {
                 });
               }}
             />
+           
           </>
+      
+         
         );
       })}
+            </div>
     </div>
   );
 };

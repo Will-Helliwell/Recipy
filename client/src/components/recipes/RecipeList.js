@@ -1,53 +1,90 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useCallback,
+} from "react";
 import Popup from "reactjs-popup";
 import FavoriteButton from "./favoriteButton"
 
 const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
 
-  const getRecipes = () => {
-    fetch(`http://localhost:5000/api/todos`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        let recipe = result
-          .filter((entry) => entry.author == "Esther Clark") // Created after X
-          .slice(0, 10);
-        setRecipes(recipe);
-        console.log("Success:", result);
+  const observer = useRef();
+  const lastRecipeElementRef = useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          console.log("Visible", node);
+          setPageNumber((prevPageNumber) => prevPageNumber + 1);
+        }
       });
-  };
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
 
-  useEffect(getRecipes, []);
-
-  // Good for performance as it only recalculates upon dependency changes
-  const filteredRecipes = useMemo(() => {
-    // Return the original list of recipes if no ingredients are selected
-    if (!selectedIngredients.length) return recipes;
-    // Loop through the recipes
-    const filteredRecipes = recipes.reduce((all, recipe) => {
-      // Because recipe.ingredients is an array we also have to loop through that
-      // in this case we're using find
-      const doesIngredientExist = recipe.ingredients.find((item) => {
-        // Loop through the checked ingredients and if ONE of the values of recipe.ingredients includes the selected ingredient key (e.g onion) then return true
-        const checkedIngredients = selectedIngredients.find((selectedItem) => {
-          return item.includes(selectedItem.toLowerCase());
+  useEffect(() => {
+    if (selectedIngredients.length > 0) {
+      console.log("in filtered pagination branch");
+      setRecipes([]);
+      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
+        method: "POST",
+        body: JSON.stringify({ ingredients: selectedIngredients }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        // .then((response) => console.log("response:", response))
+        .then(
+          ({ totalFilteredRecipesCount, totalPages, totalFilteredRecipes }) => {
+            console.log(totalPages, totalFilteredRecipesCount, filteredRecipes);
+            setFilteredRecipes((state) => {
+              console.log(
+                "state1.totalFilteredRecipes",
+                state.totalFilteredRecipes
+              );
+              console.log("totalFilteredRecipes", totalFilteredRecipes);
+              console.log("returning", [...state, ...totalFilteredRecipes]);
+              console.log("state", state);
+              return [...state, ...totalFilteredRecipes];
+            });
+            setHasMore(totalFilteredRecipes.length > 0);
+            setLoading(false);
+          }
+        );
+    } else {
+      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
+        .then((response) => response.json())
+        // .then((response) => console.log("response:", response))
+        .then(({ totalPages, totalRecipes, recipes }) => {
+          // console.log(totalPages, totalRecipes, recipes);
+          setRecipes((state) => {
+            console.log("state2", state);
+            console.log("recipes", recipes);
+            return [...state, ...recipes];
+          });
+          setHasMore(recipes.length > 0);
+          setLoading(false);
         });
-        return checkedIngredients;
-      });
-      // If this is true then add it to the list
-      if (doesIngredientExist) {
-        return [...all, recipe];
-      }
-      // If the ingredient doesn't exist at all within recipe.ingredients then just return what we've got
-      return all;
-    }, []);
-    return filteredRecipes;
-  }, [selectedIngredients, recipes]);
+    }
+  }, [pageNumber, selectedIngredients]);
+
+  console.log("outside of all branches");
+  console.log("-------------");
+  console.log("recipes:", recipes);
+  console.log("recipes length:", recipes.length);
+
+  console.log("filtered recipes:", filteredRecipes);
+  console.log("filtered recipes length:", filteredRecipes.length);
 
   return (
     <div className="all-recipes">
@@ -97,11 +134,202 @@ const RecipeList = ({ selectedIngredients }) => {
                   <p>Cook: {recipe.time.cook}</p>
                   <p>Prep: {recipe.time.prep}</p>
                 </div>
+
+        {recipes.map((recipe, index) => {
+          if (recipes.length === index + 1) {
+              return (
+                <div className="recipe-card" ref={lastRecipeElementRef}>
+                   <img className="recipe-image" src={recipe.image}></img>
+                    <p className="recipe-name"> {recipe.name}</p>
+                    <p className="recipe-summary"> {recipe.summary}</p>
+                    <p className="time-text">
+                      Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                    </p>
+                        < FavoriteButton
+                        post={recipeObject}
+                       />
+                      <Popup
+                        trigger={<button> Recipe Info</button>}
+                        position="top center"
+                        >
+                        <div className="popup-container">
+                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <p className="popup recipe-name"> {recipe.name}</p>
+                        <p className="popup recipe-summary"> {recipe.summary}</p>
+                        <p className="popup time-text">
+                          Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                        </p>
+                              {recipe.ingredients.map((ing) => {
+                                return (
+                                  <>
+                                    <li>{ing}</li>
+                                  </>
+                                );
+                              })}
+                      <h2>INSTRUCTIONS</h2>
+                              {recipe.instructions.map((steps) => {
+                                return (
+                                  <ul>
+                                    <li>{steps}</li>
+                                  </ul>
+                                );
+                              })}
+                      <h2>Time</h2>
+                      <p>Cook: {recipe.time.cook}</p>
+                      <p>Prep: {recipe.time.prep}</p>
+                      );
+                      </div>
               </Popup>
-            </div>
-          );
+              </div>
+              )} else {
+            return (
+              <div className="recipe-card" ref={lastRecipeElementRef}>
+                    <img className="recipe-image" src={recipe.image}></img>
+                    <p className="recipe-name"> {recipe.name}</p>
+                    <p className="recipe-summary"> {recipe.summary}</p>
+                    <p className="time-text">
+                      Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                    </p>
+                      < FavoriteButton
+                        post={recipeObject}
+                       />
+                      <Popup
+                        trigger={<button> Recipe Info</button>}
+                        position="top center"
+                        >
+                        <div className="popup-container">
+                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <p className="popup recipe-name"> {recipe.name}</p>
+                        <p className="popup recipe-summary"> {recipe.summary}</p>
+                        <p className="popup time-text">
+                          Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                        </p>
+                              {recipe.ingredients.map((ing) => {
+                                return (
+                                  <>
+                                    <li>{ing}</li>
+                                  </>
+                                );
+                              })}
+                      <h2>INSTRUCTIONS</h2>
+                              {recipe.instructions.map((steps) => {
+                                return (
+                                  <ul>
+                                    <li>{steps}</li>
+                                  </ul>
+                                );
+                              })}
+                      <h2>Time</h2>
+                      <p>Cook: {recipe.time.cook}</p>
+                      <p>Prep: {recipe.time.prep}</p>
+                      );
+                      </div>
+
+              </Popup>
+              </div>
+            );
+          }
         })}
+        <div>{loading && "Loading..."}</div>
       </>
+      <div>
+        {filteredRecipes.map((recipe, index) => {
+          if (filteredRecipes.length === index + 1) {
+            return (
+              <div className="recipe-card" ref={lastRecipeElementRef}>
+                    <img className="recipe-image" src={recipe.image}></img>
+                    <p className="recipe-name"> {recipe.name}</p>
+                    <p className="recipe-summary"> {recipe.summary}</p>
+                    <p className="time-text">
+                      Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                    </p>
+                       < FavoriteButton
+                        post={recipeObject}
+                       />
+                      <Popup
+                        trigger={<button> Recipe Info</button>}
+                        position="top center"
+                        >
+                        <div className="popup-container">
+                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <p className="popup recipe-name"> {recipe.name}</p>
+                        <p className="popup recipe-summary"> {recipe.summary}</p>
+                        <p className="popup time-text">
+                          Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                        </p>
+                              {recipe.ingredients.map((ing) => {
+                                return (
+                                  <>
+                                    <li>{ing}</li>
+                                  </>
+                                );
+                              })}
+                      <h2>INSTRUCTIONS</h2>
+                              {recipe.instructions.map((steps) => {
+                                return (
+                                  <ul>
+                                    <li>{steps}</li>
+                                  </ul>
+                                );
+                              })}
+                      <h2>Time</h2>
+                      <p>Cook: {recipe.time.cook}</p>
+                      <p>Prep: {recipe.time.prep}</p>
+                      );
+                      </div>
+              </Popup>
+              </div>
+            );
+          } else {
+            return (
+              <div className="recipe-card" ref={lastRecipeElementRef}>
+                    <img className="recipe-image" src={recipe.image}></img>
+                    <p className="recipe-name"> {recipe.name}</p>
+                    <p className="recipe-summary"> {recipe.summary}</p>
+                    <p className="time-text">
+                      Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                    </p>
+                      < FavoriteButton
+                        post={recipeObject}
+                       />
+                      <Popup
+                        trigger={<button> Recipe Info</button>}
+                        position="top center"
+                        >
+                        <div className="popup-container">
+                        <img className="popup recipe-image" src={recipe.image}></img>
+                        <p className="popup recipe-name"> {recipe.name}</p>
+                        <p className="popup recipe-summary"> {recipe.summary}</p>
+                        <p className="popup time-text">
+                          Cook: {recipe.time.cook} Prep: {recipe.time.prep}
+                        </p>
+                              {recipe.ingredients.map((ing) => {
+                                return (
+                                  <>
+                                    <li>{ing}</li>
+                                  </>
+                                );
+                              })}
+                      <h2>INSTRUCTIONS</h2>
+                              {recipe.instructions.map((steps) => {
+                                return (
+                                  <ul>
+                                    <li>{steps}</li>
+                                  </ul>
+                                );
+                              })}
+                      <h2>Time</h2>
+                      <p>Cook: {recipe.time.cook}</p>
+                      <p>Prep: {recipe.time.prep}</p>
+                      );
+                      </div>
+              </Popup>
+              </div>
+            );
+          }
+        })}
+      </div>
+      
     </div>
   );
 };

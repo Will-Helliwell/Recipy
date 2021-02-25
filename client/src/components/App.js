@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "../App.css";
+
 import RecipeList from "./recipes/RecipeList";
 import IngredientList from "./ingredients/IngredientList";
+
 import Navbar from "./layout/Navbar";
 import Landing from "./layout/Landing";
 import Register from "./auth/Register";
@@ -14,11 +16,10 @@ import setAuthToken from "../utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "../actions/authActions";
 import PrivateRoute from "./private-route/PrivateRoute";
 import Dashboard from "./dashboard/Dashboard";
-import SpotifyLogin from "./spotify/login.js"
-import SpotifyWebApi from 'spotify-web-api-js';
-import SpotifyPlayer from 'react-spotify-web-playback';
+import SpotifyLogin from "./spotify/login.js";
+import SpotifyWebApi from "spotify-web-api-js";
+import SpotifyPlayer from "react-spotify-web-playback";
 var spotifyApi = new SpotifyWebApi();
-
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -29,7 +30,7 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(token);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-// Check for expired token
+  // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
     // Logout user
@@ -49,26 +50,28 @@ function App() {
     console.log(token);
   }
 
-  function getHashParams(){
+  function getHashParams() {
     var hashParams = {};
-    var e, r = /([^&;=]+)=?([^&;]*)/g,
-        q = window.location.hash.substring(1);
-    e = r.exec(q)
+    var e,
+      r = /([^&;=]+)=?([^&;]*)/g,
+      q = window.location.hash.substring(1);
+    e = r.exec(q);
     while (e) {
-       hashParams[e[1]] = decodeURIComponent(e[2]);
-       e = r.exec(q);
+      hashParams[e[1]] = decodeURIComponent(e[2]);
+      e = r.exec(q);
     }
     return hashParams;
   }
 
-  function getPlaylist(){
-    spotifyApi.getUserPlaylists()
-    .then((response) => {
-      console.log('User playlists', response)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+  function getPlaylist() {
+    spotifyApi
+      .getUserPlaylists()
+      .then((response) => {
+        console.log("User playlists", response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const [ingredients, setIngredients] = useState({});
@@ -90,42 +93,43 @@ function App() {
   // Object.values ['value' 'value]
   // Object.keys ['key', 'key', 'key']
   // Object.entries [['key', 'value'], ['key', 'value]]
-  console.log("selectedIngredients", selectedIngredients);
+  // console.log("selectedIngredients", selectedIngredients);
+
   return (
     <Provider store={store}>
-    <Router>
-    <div className="App">
-  
-        <Navbar />
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        
-        <Switch>
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        </Switch>
-        <div className="spotify">
-        <SpotifyLogin/>
-        <SpotifyPlayer
-            token={token}
-            uris={['spotify:playlist:1VaucNthO1eR7A51BJoEtS']}
-        />
-        <div className="spotify-button">
-          { loggedIn &&
-            <button onClick={() => getPlaylist()}>
-            Get My Playlists
-            </button>
-          }
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+
+          <Switch>
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          </Switch>
+
+          <div className="spotify">
+            <SpotifyLogin />
+            <SpotifyPlayer
+              token={token}
+              uris={[
+                "https://api.spotify.com/v1/playlists/6ixPO9vfygyXHTvAXYwhFk",
+              ]}
+            />
+            <div className="spotify-button">
+              {loggedIn && (
+                <button onClick={() => getPlaylist()}>Get My Playlists</button>
+              )}
+            </div>
+          </div>
+
+          <IngredientList
+            ingredients={ingredients}
+            setIngredients={setIngredients}
+          />
+          <RecipeList selectedIngredients={selectedIngredients} />
         </div>
-      </div>
-      <IngredientList
-        ingredients={ingredients}
-        setIngredients={setIngredients}
-      />
-      <RecipeList selectedIngredients={selectedIngredients} />
- 
-    </div>
-    </Router>
+      </Router>
     </Provider>
   );
 }

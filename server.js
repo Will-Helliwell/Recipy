@@ -8,11 +8,13 @@ const passport = require("passport");
 const users = require("./routes/users");
 const favorites = require("./routes/favorites")
 
+const cors = require("cors");
 
-console.log("inside server.js script")
-console.log(process.env.NODE_ENV)
+console.log("inside index.js script");
+console.log(process.env.NODE_ENV);
 
 const app = express();
+app.use(cors());
 
 const port = process.env.PORT || 5000;
 
@@ -27,7 +29,7 @@ if (process.env.NODE_ENV == "test") {
     .connect(testDB, { useNewUrlParser: true })
     .then(() => console.log(`Test Database connected successfully`))
     .catch((err) => console.log(err));
-} else if (process.env.NODE_ENV == "development"){
+} else if (process.env.NODE_ENV == "development") {
   console.log("DEV IS WORKING", process.env.NODE_ENV);
   mongoose
     .connect(devDB, { useNewUrlParser: true })
@@ -54,7 +56,7 @@ app.use(function(req, res, next) {
 
 app.use(
   bodyParser.urlencoded({
-    extended: false
+    extended: false,
   })
 );
 app.use(bodyParser.json());
@@ -78,4 +80,4 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/favorites", favorites);
 app.listen(9999)
-// made some changes to routes
+

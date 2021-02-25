@@ -3,59 +3,59 @@ const Schema = mongoose.Schema;
 
 //create schema for todo
 const RecipySchema = new Schema({
-    name: {
+  name: {
+    type: String,
+  },
+  author: {
+    type: String,
+  },
+  summary: {
+    type: String,
+  },
+  skill_level: {
+    type: String,
+  },
+  rating: {
+    type: String,
+  },
+  rating_numbers: {
+    type: String,
+  },
+  ingredients: {
+    type: Array,
+  },
+  instructions: {
+    type: Array,
+  },
+  tags: {
+    type: Array,
+  },
+  time: {
+    prep: {
       type: String,
     },
-    author: {
+    cook: {
       type: String,
     },
-    summary: {
+    active: {
       type: String,
     },
-    skill_level: {
+    inactive: {
       type: String,
     },
-    rating: {
+    ready: {
       type: String,
     },
-    rating_numbers: {
+    total: {
       type: String,
     },
-    ingredients: {
-      type: Array,
-    },
-    instructions: {
-      type: Array,
-    },
-    tags: {
-      type: Array,
-    },
-    time: {
-      prep: {
-        type: String,
-      },
-      cook: {
-        type: String,
-      },
-      active: {
-        type: String,
-      },
-      inactive: {
-        type: String,
-      },
-      ready: {
-        type: String,
-      },
-      total: {
-        type: String,
-      },
-    },
-    servings: {
-      type: String,
-    },
-    image: {
-      type: String,
-    },
+  },
+  servings: {
+    type: String,
+  },
+  image: {
+    type: String,
+  },
 });
 
 //create model for todo
