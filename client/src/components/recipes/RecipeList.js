@@ -4,17 +4,17 @@ import React, {
   useMemo,
   useRef,
   useCallback,
-} from "react";
-import Popup from "reactjs-popup";
-import FavoriteButton from "./favoriteButton"
-
-const RecipeList = ({ selectedIngredients }) => {
+ } from "react";
+ import Popup from "reactjs-popup";
+ import FavoriteButton from "./favoriteButton"
+  
+ const RecipeList = ({ selectedIngredients }) => {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
-
+  
   const observer = useRef();
   const lastRecipeElementRef = useCallback(
     (node) => {
@@ -30,7 +30,7 @@ const RecipeList = ({ selectedIngredients }) => {
     },
     [loading, hasMore]
   );
-
+  
   useEffect(() => {
     if (selectedIngredients.length > 0) {
       console.log("in filtered pagination branch");
@@ -77,65 +77,20 @@ const RecipeList = ({ selectedIngredients }) => {
         });
     }
   }, [pageNumber, selectedIngredients]);
-
+  
   console.log("outside of all branches");
   console.log("-------------");
   console.log("recipes:", recipes);
   console.log("recipes length:", recipes.length);
-
+  
   console.log("filtered recipes:", filteredRecipes);
   console.log("filtered recipes length:", filteredRecipes.length);
-
+  
   return (
     <div className="all-recipes">
       <>
-        {filteredRecipes.map((recipe) => {
-          const recipeObject = recipe
-          return (
-            <div className="recipe-card" key={recipe._id}>
-              <img className="recipe-image" src={recipe.image}></img>
-              <p className="recipe-name"> {recipe.name}</p>
-              <p className="recipe-summary"> {recipe.summary}</p>
-              <p className="time-text">
-                Cook: {recipe.time.cook} Prep: {recipe.time.prep}
-              </p>
-              < FavoriteButton
-                post={recipeObject}
-               />
-              <Popup
-                trigger={<button> Recipe Info</button>}
-                position="top center"
-              >
-                <div className="popup-container">
-                  <img className="popup recipe-image" src={recipe.image}></img>
-                  <p className="popup recipe-name"> {recipe.name}</p>
-                  <p className="popup recipe-author"> {recipe.author}</p>
-                  <p className="popup recipe-summary"> {recipe.summary}</p>
-                  <p className="popup time-text">
-                    Cook: {recipe.time.cook} Prep: {recipe.time.prep}
-                  </p>
-                  <h2>INGREDIENTS</h2>
-                  {recipe.ingredients.map((ing) => {
-                    return (
-                      <>
-                        <li>{ing}</li>
-                      </>
-                    );
-                  })}
-                  <h2>INSTRUCTIONS</h2>
-                  {recipe.instructions.map((steps) => {
-                    return (
-                      <ul>
-                        <li>{steps}</li>
-                      </ul>
-                    );
-                  })}
-                  <h2>Time</h2>
-                  <p>Cook: {recipe.time.cook}</p>
-                  <p>Prep: {recipe.time.prep}</p>
-                </div>
-
         {recipes.map((recipe, index) => {
+          const recipeObject = recipe
           if (recipes.length === index + 1) {
               return (
                 <div className="recipe-card" ref={lastRecipeElementRef}>
@@ -145,9 +100,9 @@ const RecipeList = ({ selectedIngredients }) => {
                     <p className="time-text">
                       Cook: {recipe.time.cook} Prep: {recipe.time.prep}
                     </p>
-                        < FavoriteButton
-                        post={recipeObject}
-                       />
+                    < FavoriteButton
+                      post={recipeObject}
+                    />
                       <Popup
                         trigger={<button> Recipe Info</button>}
                         position="top center"
@@ -190,9 +145,9 @@ const RecipeList = ({ selectedIngredients }) => {
                     <p className="time-text">
                       Cook: {recipe.time.cook} Prep: {recipe.time.prep}
                     </p>
-                      < FavoriteButton
-                        post={recipeObject}
-                       />
+                    < FavoriteButton
+                      post={recipeObject}
+                    />
                       <Popup
                         trigger={<button> Recipe Info</button>}
                         position="top center"
@@ -224,7 +179,6 @@ const RecipeList = ({ selectedIngredients }) => {
                       <p>Prep: {recipe.time.prep}</p>
                       );
                       </div>
-
               </Popup>
               </div>
             );
@@ -234,6 +188,7 @@ const RecipeList = ({ selectedIngredients }) => {
       </>
       <div>
         {filteredRecipes.map((recipe, index) => {
+          const recipeObject = recipe
           if (filteredRecipes.length === index + 1) {
             return (
               <div className="recipe-card" ref={lastRecipeElementRef}>
@@ -243,9 +198,9 @@ const RecipeList = ({ selectedIngredients }) => {
                     <p className="time-text">
                       Cook: {recipe.time.cook} Prep: {recipe.time.prep}
                     </p>
-                       < FavoriteButton
-                        post={recipeObject}
-                       />
+                    < FavoriteButton
+                      post={recipeObject}
+                    />
                       <Popup
                         trigger={<button> Recipe Info</button>}
                         position="top center"
@@ -289,9 +244,9 @@ const RecipeList = ({ selectedIngredients }) => {
                     <p className="time-text">
                       Cook: {recipe.time.cook} Prep: {recipe.time.prep}
                     </p>
-                      < FavoriteButton
-                        post={recipeObject}
-                       />
+                    < FavoriteButton
+                      post={recipeObject}
+                    />
                       <Popup
                         trigger={<button> Recipe Info</button>}
                         position="top center"
@@ -329,9 +284,10 @@ const RecipeList = ({ selectedIngredients }) => {
           }
         })}
       </div>
-      
+     
     </div>
   );
-};
-
-export default RecipeList;
+ };
+  
+ export default RecipeList;
+ 

@@ -45,7 +45,6 @@ if (process.env.NODE_ENV == "test") {
 //since mongoose promise is depreciated, we overide it with node's promise
 mongoose.Promise = global.Promise;
 
-var cors = require('cors')
 app.use(cors()) // Use this after the variable declaration
 
 app.use(function(req, res, next) {
