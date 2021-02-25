@@ -107,22 +107,6 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
           </Switch>
-
-          <div className="spotify">
-            <SpotifyLogin />
-            <SpotifyPlayer
-              token={token}
-              uris={[
-                "https://api.spotify.com/v1/playlists/6ixPO9vfygyXHTvAXYwhFk",
-              ]}
-            />
-            <div className="spotify-button">
-              {loggedIn && (
-                <button onClick={() => getPlaylist()}>Get My Playlists</button>
-              )}
-            </div>
-          </div>
-
           <IngredientList
             ingredients={ingredients}
             setIngredients={setIngredients}
