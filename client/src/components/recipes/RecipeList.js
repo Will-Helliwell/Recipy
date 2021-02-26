@@ -165,7 +165,7 @@ import React, {
                                   </>
                                 );
                               })}
-                      <h2>INSTRUCTIONS</h2>
+                      <p className="pop-ingr">Instructions</p>
                               {recipe.instructions.map((steps) => {
                                 return (
                                   <ul>
@@ -210,7 +210,7 @@ import React, {
                                   </>
                                 );
                               })}
-                      <h2>INSTRUCTIONS</h2>
+                      <p className="pop-ingr">Instructions</p>
                               {recipe.instructions.map((steps) => {
                                 return (
                                   <ul>
@@ -218,7 +218,7 @@ import React, {
                                   </ul>
                                 );
                               })}
-                      <h2>Time</h2>
+                      <p className="pop-ingr">Time</p>
                       <p>Cook: {recipe.time.cook}</p>
                       <p>Prep: {recipe.time.prep}</p>
 
@@ -264,7 +264,7 @@ import React, {
                                   </>
                                 );
                               })}
-                      <h2>INSTRUCTIONS</h2>
+                      <p className="pop-ingr">Instructions</p>
                               {recipe.instructions.map((steps) => {
                                 return (
                                   <ul>
@@ -272,7 +272,7 @@ import React, {
                                   </ul>
                                 );
                               })}
-                      <h2>Time</h2>
+                      <p className="pop-ingr">Instructions</p>
                       <p>Cook: {recipe.time.cook}</p>
                       <p>Prep: {recipe.time.prep}</p>
 
@@ -310,7 +310,7 @@ import React, {
                                   </>
                                 );
                               })}
-                      <h2>INSTRUCTIONS</h2>
+                      <p className="pop-ingr">Instructions</p>
                               {recipe.instructions.map((steps) => {
                                 return (
                                   <ul>
@@ -318,7 +318,7 @@ import React, {
                                   </ul>
                                 );
                               })}
-                      <h2>Time</h2>
+                      <p className="pop-ingr">Instructions</p>
                       <p>Cook: {recipe.time.cook}</p>
                       <p>Prep: {recipe.time.prep}</p>
 
