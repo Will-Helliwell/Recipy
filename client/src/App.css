@@ -21,6 +21,10 @@
   margin: 10px;
 }
 
+.pop-ingr {
+  font-weight: bold;
+  font-size: 15px;
+}
 
 .App-header {
   background-color: #282c34;
@@ -89,6 +93,7 @@
 }
 
 .popup-container {
+  padding: 20px;
   height: 80%;
   width: 50%;
   background-color: rgb(205, 226, 200);
@@ -117,13 +122,24 @@
 .ign-name {
   background-color: #f1f1f1;
   width: 200px;
- 
+
   text-align: center;
   line-height: 75px;
   font-size: 30px;
-  height: 100px; 
+  height: 100px;
   margin: auto;
-  
+
+}
+
+.playlist-buttons {
+  display: flex;
+justify-content: center;
+}
+.gen {
+  /* background-color:#2979FF; */
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
 }
 
 .categ {

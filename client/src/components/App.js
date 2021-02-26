@@ -159,19 +159,19 @@ function App() {
           </div>
             <div className="playlist-buttons">
 
-              <button onClick={handleClickURIs} data-uris="spotify:playlist:0gUutpl4Vqbbh9gHFKZwX1">
+              <button className="gen" onClick={handleClickURIs} data-uris="spotify:playlist:0gUutpl4Vqbbh9gHFKZwX1">
               All American
               </button>
-              <button onClick={handleClickURIs} data-uris="spotify:playlist:4MsR10XAYWsDCSrP1DhrUJ">
+              <button className="gen" onClick={handleClickURIs} data-uris="spotify:playlist:4MsR10XAYWsDCSrP1DhrUJ">
               French
               </button>
-              <button onClick={handleClickURIs} data-uris="spotify:playlist:0iuKmZRRdh8zvFjmMKWjFg">
+              <button className="gen" onClick={handleClickURIs} data-uris="spotify:playlist:0iuKmZRRdh8zvFjmMKWjFg">
               Latin American
               </button>
-              <button onClick={handleClickURIs} data-uris="spotify:playlist:6wADQ2Pq08RZvEEO7D8Ncn">
+              <button className="gen" onClick={handleClickURIs} data-uris="spotify:playlist:6wADQ2Pq08RZvEEO7D8Ncn">
               Oriental
               </button>
-              <button onClick={handleClickURIs} data-uris="spotify:playlist:2YTGWJIg1z2eJaLVv9QsSH">
+              <button className="gen" onClick={handleClickURIs} data-uris="spotify:playlist:2YTGWJIg1z2eJaLVv9QsSH">
               Italian
               </button>
 

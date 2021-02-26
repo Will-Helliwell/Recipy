@@ -33,3 +33,7 @@ In order to run the different examples, open the folder with the name of the flo
     $ node app.js
 
 Then, open `http://localhost:8888` in a browser.
+
+CLIENT_ID=e3f3e0685c0446a387337e8d2f2a5bda
+CLIENT_SECRET=9a6dcc893aa94df6ac46247e76b54e26
+REDIRECT_URI='http://localhost:8888/callback'
