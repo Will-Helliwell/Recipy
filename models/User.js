@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-//create schema for todo
 const RecipySchema = new Schema({
   name: {
     type: String,
@@ -58,7 +57,29 @@ const RecipySchema = new Schema({
   },
 });
 
-//create model for todo
-const Recipy = mongoose.model("recipes", RecipySchema);
 
-module.exports = Recipy;
+// Create Schema
+const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  favorites: [RecipySchema],
+});
+
+const User = mongoose.model("users", UserSchema);
+module.exports = User;
+
+// made some changes to routes
