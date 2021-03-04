@@ -2,7 +2,7 @@
 
 ## About Project
 
- Recipy
+ Recipy is a web application that allows users to filter recipes by ingredients they have in their pantry. Users can also add recipes to their favourites and play a themed Spotify playlist to cook along to.
 ---
 ### Initial Spec
 
@@ -66,7 +66,7 @@ I do not want the 'add recipe ingredients' button to add ingredients I have alre
 | ReactJS       | Frontend JavaScript Framework |
 | Redux         | Managing application state    |
 | Puppeteer     | Web Scraping                  |
-| Cypress       | Front-end testing             |
+| Cypress       | Feature testing             |
 | Jasmine       | Back-end testing              |
 | MongoDB       | Database                      |
 | CSS           | Styling                       |
@@ -103,16 +103,15 @@ npm test
 ---
 ## **To run the web app**
 
-In the project directory, run:
+In order to run the project, you must have NodeJS and node package manager (npm) installed.
+To run in development mode (connects to the development database), navigate to the project root directory and run:
 ```
 npm run dev
 ```
-Runs the app in the development mode.
-
 The browser should open the project url in your browser automatically, but if not visit [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
 ## **Links to Repositories**
 
-- Recipe Scraper - https://github.com/AJSMonty/scraper
-- Recipy - https://github.com/AJSMonty/Recipy
+- Recipe Scraper - https://github.com/Will-Helliwell/scraper
+- Recipy - https://github.com/Will-Helliwell/Recipy
