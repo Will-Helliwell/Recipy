@@ -1,8 +1,8 @@
 # **Recipy**
 
-## About Project
+## About the Project
 
- Recipy is a web application that allows users to filter recipes by ingredients they have in their pantry. Users can also add recipes to their favourites and play a themed Spotify playlist to cook along to.
+ Recipy (pronounced 'reci-pie') is a web application that allows users to filter recipes by ingredients they have in their pantry. Users can also add recipes to their favourites and play a themed Spotify playlist to cook along to.
 ---
 ### Initial Spec
 
