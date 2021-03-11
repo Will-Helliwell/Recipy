@@ -4,7 +4,7 @@
 
 Recipy (pronounced 'reci-pie') is a web application that allows users to filter recipes by ingredients they have in their pantry. Users can also login to add recipes to their favourites and play a themed Spotify playlist within the app to cook along to.
 
-All recipes have been scraped from [BBC Good Food](https://www.bbcgoodfood.com/) using a custom-built scraper located in [this repository](https://github.com/Will-Helliwell/Recipy).
+All recipes have been scraped from [BBC Good Food](https://www.bbcgoodfood.com/) using a custom-built scraper located in [this repository](https://github.com/Will-Helliwell/Recipe_Scraper).
 
 Accordingly, the rights to all recipes belong to BBC Good Food. This project is solely for educational purposes.
 
@@ -105,6 +105,6 @@ Original contributors - Zeen Lam, Lisa Bardelli, AJ Montgomery, Simon Piper.
 
 ## **Links to Repositories**
 
-- [Recipe Scraper](https://github.com/Will-Helliwell/scraper)
+- [Recipe Scraper](https://github.com/Will-Helliwell/Recipe_Scraper)
 - [Orignal group project Repository](https://github.com/AJSMonty/Recipy)
 
