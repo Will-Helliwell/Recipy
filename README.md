@@ -2,22 +2,12 @@
 
 ## About the Project
 
- Recipy (pronounced 'reci-pie') is a web application that allows users to filter recipes by ingredients they have in their pantry. Users can also add recipes to their favourites and play a themed Spotify playlist to cook along to.
----
-### Initial Spec
+Recipy (pronounced 'reci-pie') is a web application that allows users to filter recipes by ingredients they have in their pantry. Users can also login to add recipes to their favourites and play a themed Spotify playlist within the app to cook along to.
 
-**MVP**:
-- A web app
-- Access to a large bank of recipes (using WebScraper or API)
-- Display the recipes
+All recipes have been scraped from [BBC Good Food](https://www.bbcgoodfood.com/) using a custom-built scraper located in [this repository](https://github.com/Will-Helliwell/Recipe_Scraper).
 
- **Additional Features**
-- Ability to filter the recipes based on single/multiple ingredients
-- Spotify playlist
-- *Requires signup/login* - Ability to add recipes to favourites
-- *Requires signup/login* - Ability to add all ingredients for a recipe into a shopping cart (using whisk API)
+Accordingly, the rights to all recipes belong to BBC Good Food. This project is solely for educational purposes.
 
----
 ### **User Stories**
 
 #### Completed
@@ -51,10 +41,6 @@ I would like to have a link to a relaxing background music playlist from Spotify
 As a user
 So that I can easily buy the food I need for next week
 I would like to add all ingredients from any recipe of my choice to my shopping cart with one click
-
-As a user
-To minimise food waste
-I do not want the 'add recipe ingredients' button to add ingredients I have already ticked to my shopping cart
 ```
 ---
 ### **Tech Summary**
@@ -63,24 +49,24 @@ I do not want the 'add recipe ingredients' button to add ingredients I have alre
 | ------------- | ----------------------------- |
 | Node          | Back-end JavaScript Framework |
 | Express       | Web application framework     |
-| ReactJS       | Frontend JavaScript Framework |
+| React         | Frontend Framework            |
 | Redux         | Managing application state    |
-| Puppeteer     | Web Scraping                  |
-| Cypress       | Feature testing             |
-| Jasmine       | Back-end testing              |
+| Cypress       | Feature testing               |
+| Jasmine       | Unit testing                  |
 | MongoDB       | Database                      |
 | CSS           | Styling                       |
 | Travis        | CI/CD                         |
-| Heroku        | Production Environment        |
+| Heroku        | Live deployment (work in progress)        |
 | ESLint        | Linting                       |
+| Puppeteer     | Headless browser controller (recipe scraper repo only)     |
 
 ---
-## **Getting started:**
+## **Setup**
 
 Clone this repository
 
 ```
-git clone https://github.com/AJSMonty/Recipy.git
+git clone https://github.com/will-helliwell/Recipy.git
 ```
 
 Move to the project directory
@@ -108,10 +94,17 @@ To run in development mode (connects to the development database), navigate to t
 ```
 npm run dev
 ```
-The browser should open the project url in your browser automatically, but if not visit [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The browser should open the project url in your browser automatically, but if not visit [http://localhost:3000](http://localhost:3000) to view.
 
+
+## **Contributors**
+
+This repository is cloned from the original group project, allowing me to make changes and alter the databases in isolation.
+
+Other contributors - Zeen Lam, Lisa Bardelli, AJ Montgomery, Simon Piper.
 
 ## **Links to Repositories**
 
-- Recipe Scraper - https://github.com/Will-Helliwell/scraper
-- Recipy - https://github.com/Will-Helliwell/Recipy
+- [Recipe Scraper](https://github.com/Will-Helliwell/Recipe_Scraper)
+- [Orignal group project Repository](https://github.com/AJSMonty/Recipy)
+
