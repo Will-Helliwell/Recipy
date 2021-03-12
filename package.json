@@ -7,7 +7,7 @@
     "client-install": "npm install --prefix client",
     "test": "export NODE_ENV=test && jasmine",
     "spotify": "cd web-api-auth-examples/authorization_code && node app.js",
-    "start": "concurrently \"node server.js\" \"npm run spotify\"",
+    "start": "node server.js",
     "start-watch": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "export NODE_ENV=development && concurrently \"npm run spotify\" \"npm run start-watch\" \"npm run client\"",
