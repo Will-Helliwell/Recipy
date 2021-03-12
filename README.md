@@ -10,7 +10,20 @@ All recipes have been scraped from [BBC Good Food](https://www.bbcgoodfood.com/)
 
 Accordingly, the rights to all recipes belong to BBC Good Food. This project is solely for educational purposes.
 
-### **User Stories**
+## **Screenshots of app in use**
+
+### Homepage
+![Homepage](https://github.com/Will-Helliwell/Recipy/blob/master/recipy_homepage_screenshot.png)
+
+### Filtering Recipes by Ingredient
+![Homepage](https://github.com/Will-Helliwell/Recipy/blob/master/recipy_filter_screenshot.png)
+
+### Login
+![Homepage](https://github.com/Will-Helliwell/Recipy/blob/master/recipy_login_screenshot.png)
+
+
+
+## **User Stories**
 
 #### Completed
 ```
@@ -33,11 +46,15 @@ I would like to click on a recipe card and see a pop-up of all recipe details (i
 As a user
 So that I can find recipes that use ingredients I have in the cupboard
 I want to be able to filter recipes by ingredients
-
+```
+#### In Progress
+```
 As a user
 I can listen to music with my meal
 I would like to have a link to a relaxing background music playlist from Spotify
 ```
+This works on the dev environment, but not yet in the deployed app.
+
 #### Future Features
 ```
 As a user
