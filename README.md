@@ -1,5 +1,7 @@
 # **Recipy**
 
+[Visit the deployed app](https://will-recipy.herokuapp.com/)
+
 ## About the Project
 
 Recipy (pronounced 'reci-pie') is a web application that allows users to filter recipes by ingredients they have in their pantry. Users can also login to add recipes to their favourites and play a themed Spotify playlist within the app to cook along to.
@@ -107,4 +109,3 @@ Other contributors - Zeen Lam, Lisa Bardelli, AJ Montgomery, Simon Piper.
 
 - [Recipe Scraper](https://github.com/Will-Helliwell/Recipe_Scraper)
 - [Orignal group project Repository](https://github.com/AJSMonty/Recipy)
-
