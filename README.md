@@ -101,7 +101,7 @@ The browser should open the project url in your browser automatically, but if no
 
 This repository is cloned from the original group project, allowing me to make changes and alter the databases in isolation.
 
-Original contributors - Zeen Lam, Lisa Bardelli, AJ Montgomery, Simon Piper.
+Other contributors - Zeen Lam, Lisa Bardelli, AJ Montgomery, Simon Piper.
 
 ## **Links to Repositories**
 
