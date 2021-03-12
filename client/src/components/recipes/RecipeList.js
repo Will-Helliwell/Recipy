@@ -37,7 +37,7 @@ import React, {
       console.log("in filtered pagination branch");
       setRecipes([]);
       // setFilteredRecipes([])
-      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`, {
+      fetch(`/api/todos?page=${pageNumber}`, {
         method: "POST",
         body: JSON.stringify({ ingredients: selectedIngredients }),
         headers: {
@@ -64,7 +64,7 @@ import React, {
           }
         );
     } else {
-      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
+      fetch(`/api/todos?page=${pageNumber}`)
         .then((response) => response.json())
         // .then((response) => console.log("response:", response))
         .then(({ totalPages, totalRecipes, recipes }) => {
@@ -114,7 +114,7 @@ import React, {
           }
         );
     } else {
-      fetch(`http://localhost:5000/api/todos?page=${pageNumber}`)
+      fetch(`/api/todos?page=${pageNumber}`)
         .then((response) => response.json())
         // .then((response) => console.log("response:", response))
         .then(({ totalPages, totalRecipes, recipes }) => {

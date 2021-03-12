@@ -16,7 +16,7 @@ class FavoriteButton extends React.Component {
                 const removeFav = { name: user_id.name, recipe: this.props.post }
                 console.log(removeFav)
                 axios
-                    .post("http://localhost:5000/api/favorites/removefav", removeFav)
+                    .post("/api/favorites/removefav", removeFav)
                     .then(
                         res => {
                         console.log("deleting fav")
@@ -28,7 +28,7 @@ class FavoriteButton extends React.Component {
             const addToFav = { name: user_id.name, recipe: this.props.post }
             console.log(addToFav)
             axios
-              .post("http://localhost:5000/api/favorites/addfav", addToFav)
+              .post("/api/favorites/addfav", addToFav)
               .then(
                 res => {
                 console.log("inside axios post request")
@@ -51,7 +51,7 @@ class FavoriteButton extends React.Component {
           {this.state.liked ? "Remove from Favorites" : "Add to Favorites"}
       </button>
     )
-  }   
+  }
 }
 
 const mapStateToProps = (state) => {
