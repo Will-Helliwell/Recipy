@@ -6,10 +6,10 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "test": "export NODE_ENV=test && jasmine",
-    "start": " node server.js",
+    "spotify": "cd web-api-auth-examples/authorization_code && node app.js",
+    "start": "concurrently \"node server.js\" \"npm run spotify\"",
     "start-watch": "nodemon server.js",
     "client": "npm start --prefix client",
-    "spotify": "cd web-api-auth-examples/authorization_code && node app.js",
     "dev": "export NODE_ENV=development && concurrently \"npm run spotify\" \"npm run start-watch\" \"npm run client\"",
     "prod": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
