@@ -100,10 +100,15 @@ Run the package installer
 npm install
 ```
 ---
-## **To run tests:**
+## **Testing:**
 
+To run feature tests with Cypress:
+`npm run feature-test`
+This will open a browser window containing the app (connected to the dev database). It will also open up the Cypress Test Runner in a another browser window, from where you can run feature tests (individually or all at once).
+
+To run unit tests with Jasmine:
 ```
-npm test
+npm run unit-test
 ```
 ---
 ## **To run the web app**
