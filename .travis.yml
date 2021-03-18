@@ -4,5 +4,6 @@ node_js:
 
 script:
   - npm install
+  - cd client && npm install --only=dev && npm install && npm run build
   - npm run unit-test
-  - npm run feature-test
+  - npm run test
