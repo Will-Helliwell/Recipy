@@ -61,6 +61,13 @@ As a user
 So that I can easily buy the food I need for next week
 I would like to add all ingredients from any recipe of my choice to my shopping cart with one click
 ```
+
+#### Completed solo since end of group project
+
+- Deployed app to Heroku
+- Reconfigure databases - test database is now my personal version, containing a fixed 118 recipes. Moved production database key to private .env file to prevent manipulation of deployment. Kept test and dev databases public (in config/keys.js) to allow anyone to clone and run the app and tests.
+- In the process of adding Cypress feature testing
+- Misc - update readme, clean up scripts, improved scripts (e.g. `npm run dev` now starts Spotify server as well as backend and client servers)
 ---
 ### **Tech Summary**
 
@@ -103,7 +110,9 @@ npm install
 ## **Testing:**
 
 To run feature tests with Cypress:
-`npm run feature-test`
+```
+npm run feature-test
+```
 This will open a browser window containing the app (connected to the dev database). It will also open up the Cypress Test Runner in a another browser window, from where you can run feature tests (individually or all at once).
 
 To run unit tests with Jasmine:

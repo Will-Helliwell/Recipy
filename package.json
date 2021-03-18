@@ -5,13 +5,14 @@
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "unit-test": "export NODE_ENV=test && jasmine",
-    "feature-test": "concurrently \"npm run dev\" \"./node_modules/.bin/cypress open\"",
-    "spotify": "cd web-api-auth-examples/authorization_code && node app.js",
     "start": "node server.js",
     "start-watch": "nodemon server.js",
+    "spotify": "cd web-api-auth-examples/authorization_code && node app.js",
     "client": "npm start --prefix client",
     "dev": "export NODE_ENV=development && concurrently \"npm run spotify\" \"npm run start-watch\" \"npm run client\"",
+    "test": "export NODE_ENV=test && concurrently \"npm run spotify\" \"npm run start-watch\" \"npm run client\"",
+    "unit-test": "export NODE_ENV=test && jasmine",
+    "feature-test": "concurrently \"npm run test\" \"./node_modules/.bin/cypress open\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "repository": {
