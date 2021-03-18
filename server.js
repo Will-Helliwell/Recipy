@@ -10,9 +10,6 @@ const favorites = require("./routes/favorites")
 
 const cors = require("cors");
 
-console.log("inside index.js script");
-console.log(process.env.NODE_ENV);
-
 const app = express();
 app.use(cors());
 
@@ -20,7 +17,7 @@ const port = process.env.PORT || 5000;
 
 const testDB = require("./config/keys").mongoTEST;
 const devDB = require("./config/keys").mongoDEV;
-const prodDB = require("./config/keys").mongoPROD;
+const prodDB = process.env.mongoPROD;
 
 //connect to the database
 if (process.env.NODE_ENV == "test") {
