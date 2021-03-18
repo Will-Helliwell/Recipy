@@ -1,5 +1,7 @@
 # **Recipy**
 
+[![Build Status](https://travis-ci.com/Will-Helliwell/Recipy.svg?branch=master)](https://travis-ci.com/Will-Helliwell/Recipy)
+
 [Visit the deployed app](https://will-recipy.herokuapp.com/)
 
 ## About the Project
@@ -62,12 +64,25 @@ So that I can easily buy the food I need for next week
 I would like to add all ingredients from any recipe of my choice to my shopping cart with one click
 ```
 
-#### Completed solo since end of group project
+#### Solo Work
 
+##### Personal Focus Areas During Group Project
+- Recipe scraper
+- Filtering by ingredient (backend routes and front-end tweaks in React)
+
+##### Completed Since End of Group Project
 - Deployed app to Heroku
 - Reconfigure databases - test database is now my personal version, containing a fixed 118 recipes. Moved production database key to private .env file to prevent manipulation of deployment. Kept test and dev databases public (in config/keys.js) to allow anyone to clone and run the app and tests.
 - In the process of adding Cypress feature testing
 - Misc - update readme, clean up scripts, improved scripts (e.g. `npm run dev` now starts Spotify server as well as backend and client servers)
+
+##### Still to do
+- Add further feature tests
+- Add unit tests
+- Add feature tests to CI/CD pipeline
+- Improve filtering (un-clicking an option should refresh view and jump to the top)
+- Complete Spotify connection (currently getting 'client-id' error)
+- Further refactoring (specifically routes in api.js + recipy scraper)
 ---
 ### **Tech Summary**
 
